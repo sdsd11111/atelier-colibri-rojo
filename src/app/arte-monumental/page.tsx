@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Trophy } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -10,6 +10,7 @@ import MonumentalProcess from "@/components/MonumentalProcess";
 import MonumentalGalleryCTA from "@/components/MonumentalGalleryCTA";
 
 export default function ArteMonumentalPage() {
+    const [isExpanded, setIsExpanded] = useState(false);
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -70,14 +71,26 @@ export default function ArteMonumentalPage() {
                     </motion.h1>
 
                     {/* Subtítulo */}
-                    <motion.p
+                    <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-                        className="text-lg md:text-xl md:text-2xl font-light text-white/70 max-w-3xl mb-12 font-[family-name:var(--font-outfit)] leading-relaxed"
+                        className="text-left md:text-center w-full max-w-3xl mb-12"
                     >
-                        Más de 15 años transformando el entorno urbano con obras de gran escala. Especialistas en muralismo artístico y escultura monumental que trascienden en el tiempo.
-                    </motion.p>
+                        <p className="text-lg md:text-xl md:text-2xl font-light text-white/70 font-[family-name:var(--font-outfit)] leading-relaxed">
+                            Más de 15 años transformando el entorno urbano con obras de gran escala.
+                            <span className={isExpanded ? "inline" : "hidden md:inline"}> Especialistas en muralismo artístico y escultura monumental que trascienden en el tiempo.</span>
+                        </p>
+                        {!isExpanded && (
+                            <button
+                                onClick={() => setIsExpanded(true)}
+                                className="md:hidden mt-4 mx-auto text-[11px] font-bold uppercase tracking-[0.2em] text-[#EE1D23] hover:text-white transition-colors flex items-center justify-center gap-2"
+                                aria-label="Ver más información"
+                            >
+                                Seguir leyendo <ArrowRight size={12} strokeWidth={2} />
+                            </button>
+                        )}
+                    </motion.div>
 
                     {/* CTAs */}
                     <motion.div

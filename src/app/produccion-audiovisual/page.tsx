@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, PlayCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -10,6 +10,8 @@ import AudiovisualExpertise from "@/components/AudiovisualExpertise";
 import AudiovisualShowreelCTA from "@/components/AudiovisualShowreelCTA";
 
 export default function ProduccionAudiovisualPage() {
+    const [isExpanded, setIsExpanded] = useState(false);
+
     return (
         <main className="min-h-screen bg-[#050505]">
             <Navbar />
@@ -66,14 +68,26 @@ export default function ProduccionAudiovisualPage() {
                     </motion.h1>
 
                     {/* Subtítulo Tecnológico/Estético */}
-                    <motion.p
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-                        className="text-lg md:text-xl font-light text-white/60 max-w-3xl mb-12 font-[family-name:var(--font-outfit)] leading-relaxed"
+                        className="w-full max-w-3xl mb-12 text-left md:text-center"
                     >
-                        Capturamos la esencia de su marca o proyecto a través de una lente profesional. Unimos la maestría técnica y compositiva del Atelier con las nuevas tendencias de la comunicación visual.
-                    </motion.p>
+                        <p className="text-lg md:text-xl font-light text-white/60 font-[family-name:var(--font-outfit)] leading-relaxed">
+                            Capturamos la esencia de su marca o proyecto a través de una lente profesional.
+                            <span className={isExpanded ? "inline" : "hidden md:inline"}> Unimos la maestría técnica y compositiva del Atelier con las nuevas tendencias de la comunicación visual.</span>
+                        </p>
+                        {!isExpanded && (
+                            <button
+                                onClick={() => setIsExpanded(true)}
+                                className="md:hidden mt-4 mx-auto text-[11px] font-bold uppercase tracking-[0.2em] text-[#EE1D23] hover:text-white transition-colors flex items-center justify-center gap-2"
+                                aria-label="Ver más información"
+                            >
+                                Seguir leyendo <ArrowRight size={12} strokeWidth={2} />
+                            </button>
+                        )}
+                    </motion.div>
 
                     {/* CTAs */}
                     <motion.div

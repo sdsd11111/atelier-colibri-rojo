@@ -12,22 +12,22 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 mb-24">
 
                     {/* Brand */}
-                    <div className="col-span-1 lg:col-span-1">
-                        <div className="flex items-center gap-3 mb-8">
-                            <div className="relative w-10 h-10 flex-shrink-0">
+                    <div className="col-span-1 lg:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
+                        <div className="flex flex-col md:flex-row items-center gap-3 mb-8">
+                            <div className="relative w-20 h-20 md:w-10 md:h-10 flex-shrink-0">
                                 <Image
                                     src="/Logo.webp"
                                     alt="Logo Atelier Colibrí Rojo"
                                     fill
-                                    className="object-contain brightness-0 invert"
+                                    className="object-contain"
                                 />
                             </div>
-                            <h4 className="text-lg font-normal tracking-[0.2em] font-[family-name:var(--font-cinzel)] uppercase">
+                            <h4 className="text-lg font-normal tracking-[0.2em] font-[family-name:var(--font-cinzel)] uppercase mt-2 md:mt-0">
                                 Atelier <span className="text-[#EE1D23]">Colibrí</span>
                             </h4>
                         </div>
-                        <div className="flex flex-col gap-6">
-                            <p className="text-xs font-light text-white/60 leading-relaxed">
+                        <div className="flex flex-col gap-6 items-center md:items-start">
+                            <p className="text-xs font-light text-white/60 leading-relaxed max-w-[280px] md:max-w-none">
                                 Preservando el pasado y esculpiendo el futuro. Nodo de soluciones creativas integrales con trayectoria internacional.
                             </p>
                             <div className="flex gap-8">
@@ -42,7 +42,7 @@ const Footer = () => {
                     </div>
 
                     {/* Links */}
-                    <nav aria-label="Servicios profesionales">
+                    <nav aria-label="Servicios profesionales" className="flex flex-col items-center md:items-start text-center md:text-left">
                         <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-10 block">Servicios</span>
                         <ul className="space-y-4">
                             {["Arte Público (Muralismo/Escultura)", "Restauración Profesional", "Producción Audiovisual", "Academia de Artes Plásticas"].map(service => (
@@ -54,25 +54,25 @@ const Footer = () => {
                     </nav>
 
                     {/* Contact */}
-                    <div>
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-10 block">Ubicación</span>
-                        <div className="space-y-6">
-                            <div className="flex gap-4">
+                        <div className="space-y-6 flex flex-col items-center md:items-start">
+                            <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
                                 <MapPin size={16} className="text-white/30 shrink-0" />
                                 <p className="text-[11px] font-light text-white/60 leading-relaxed max-w-[200px]">
                                     Calle Imbabura entre Olmedo y Bernardo Valdivieso, Loja - Ecuador.
                                 </p>
                             </div>
-                            <div className="pl-8 text-[11px] italic text-white/40 font-light border-l border-white/10">
+                            <div className="md:pl-8 text-[11px] italic text-white/40 font-light border-t pt-4 md:border-t-0 md:pt-0 md:border-l border-white/10">
                                 A pocos pasos de la Casa de la Cultura
                             </div>
                         </div>
                     </div>
 
                     {/* Credits & Designer */}
-                    <div className="flex flex-col items-start">
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-10 block">Créditos</span>
-                        <div className="space-y-4">
+                        <div className="space-y-4 flex flex-col items-center md:items-start">
                             <p className="text-[11px] font-light text-white/60">
                                 Diseñado por <a href="https://cesarreyesjaramillo.com/" target="_blank" rel="noopener noreferrer" className="text-white font-bold hover:text-[#EE1D23] transition-colors" aria-label="Visitar sitio web del diseñador Cesar Reyes">Cesar Reyes</a>
                             </p>
@@ -85,11 +85,11 @@ const Footer = () => {
                 </div>
 
                 {/* Legal */}
-                <div className="flex flex-col md:flex-row items-center justify-between pt-12 border-t border-white/10">
-                    <p className="text-[9px] font-bold text-white/40 uppercase tracking-widest">
+                <div className="flex flex-col md:flex-row items-center justify-between pt-12 border-t border-white/10 gap-6 md:gap-0">
+                    <p className="text-[9px] font-bold text-white/40 uppercase tracking-widest text-center md:text-left">
                         Sello de Excelencia Artística Lojana.
                     </p>
-                    <div className="flex gap-10 mt-6 md:mt-0">
+                    <div className="flex gap-10 mt-2 md:mt-0">
                         <a href="/privacidad" className="text-[8px] font-bold text-white/40 uppercase tracking-widest hover:text-[#EE1D23] transition-colors" aria-label="Ver política de privacidad">Privacidad</a>
                         <a href="/terminos" className="text-[8px] font-bold text-white/40 uppercase tracking-widest hover:text-[#EE1D23] transition-colors" aria-label="Ver términos de servicio">Términos</a>
                     </div>

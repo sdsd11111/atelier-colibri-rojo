@@ -53,6 +53,8 @@ const NAV_LINKS = [
 
 /** Hero Section: Editorial Gallery Layout */
 const Hero = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.3 } },
@@ -70,31 +72,31 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative h-screen min-h-[750px] flex items-center overflow-hidden bg-[#FDFDFD]" aria-labelledby="hero-heading">
+    <section className="relative h-[100dvh] lg:h-screen lg:min-h-[750px] flex items-center overflow-hidden bg-[#FDFDFD]" aria-labelledby="hero-heading">
       {/* Background Aesthetic: Minimal Textures */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden hidden lg:block">
         <div className="absolute top-0 right-0 w-[40vw] h-full bg-gray-50/50" />
         <div className="absolute top-[15%] left-[10%] text-[20vw] font-black text-gray-50/20 select-none font-[family-name:var(--font-cinzel)]" aria-hidden="true">
           ART
         </div>
       </div>
 
-      <div className="container mx-auto px-8 relative z-20 h-full">
-        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-0 items-center h-full">
+      <div className="container mx-auto px-6 lg:px-8 relative z-20 h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-0 items-center h-full">
 
           {/* Main Title Area */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="pr-12 border-l border-gray-100 pl-12 h-[60%] flex flex-col justify-center"
+            className="lg:pr-12 lg:border-l lg:border-gray-100 lg:pl-12 h-full lg:h-[60%] flex flex-col justify-center relative z-10 pt-20 lg:pt-0"
           >
-            <motion.div variants={itemVariants} className="flex items-center gap-4 mb-12">
-              <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#EE1D23]">
+            <motion.div variants={itemVariants} className="flex items-center gap-3 lg:gap-4 mb-6 lg:mb-12">
+              <span className="text-[9px] lg:text-[10px] font-bold uppercase tracking-[0.3em] lg:tracking-[0.5em] text-[#EE1D23]">
                 Loja, Ecuador
               </span>
-              <div className="h-[1px] w-12 bg-gray-200" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-gray-400">
+              <div className="h-[1px] w-8 lg:w-12 bg-gray-300 lg:bg-gray-200" />
+              <span className="text-[9px] lg:text-[10px] font-bold uppercase tracking-[0.3em] lg:tracking-[0.5em] text-gray-600 lg:text-gray-400">
                 Studio & Academy
               </span>
             </motion.div>
@@ -102,20 +104,30 @@ const Hero = () => {
             <motion.h1
               id="hero-heading"
               variants={itemVariants}
-              className="text-3xl lg:text-5xl font-normal leading-[1.2] lg:leading-[1.1] text-[#0F172A] mb-8 lg:mb-12 tracking-tight font-[family-name:var(--font-cinzel)]"
+              className="text-4xl leading-[1.1] sm:text-5xl lg:text-6xl font-normal lg:leading-[1.1] text-[#0F172A] mb-4 lg:mb-12 tracking-tight font-[family-name:var(--font-cinzel)]"
             >
               Atelier Colibrí Rojo: <span className="text-[#EE1D23]">20 años de maestría</span> en arte y restauración en Loja.
             </motion.h1>
 
-            <motion.div variants={itemVariants} className="max-w-2xl mb-12 lg:mb-16">
-              <h2 className="text-lg lg:text-xl text-gray-400 leading-relaxed font-light font-[family-name:var(--font-outfit)]">
-                Expertos en arte público monumental, restauración de bienes pictóricos y formación académica profesional. Un legado familiar de tres décadas en el corazón de la <span className="text-[#0F172A]/60 font-medium italic">Cuna de los Artistas</span>.
+            <motion.div variants={itemVariants} className="max-w-2xl mb-8 lg:mb-16">
+              <h2 className="text-[15px] sm:text-lg lg:text-xl text-gray-700 lg:text-gray-400 leading-relaxed font-light font-[family-name:var(--font-outfit)]">
+                Expertos en arte público monumental, restauración de bienes pictóricos y formación académica profesional.
+                <span className={cn("lg:inline", isExpanded ? "inline" : "hidden")}> Un legado familiar de tres décadas en el corazón de la <span className="text-[#0F172A]/80 lg:text-[#0F172A]/60 font-medium italic">Cuna de los Artistas</span>.</span>
               </h2>
+              {!isExpanded && (
+                <button
+                  onClick={() => setIsExpanded(true)}
+                  className="lg:hidden mt-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[#EE1D23] hover:text-[#0F172A] transition-colors flex items-center gap-2"
+                  aria-label="Ver más información"
+                >
+                  Ver más <ArrowRight size={12} strokeWidth={2} />
+                </button>
+              )}
             </motion.div>
 
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-8 lg:gap-12">
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 lg:gap-12 w-full">
               <button
-                className="group relative flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.4em] text-white bg-[#EE1D23] px-10 py-5 rounded-full hover:bg-[#0F172A] transition-all duration-500 shadow-xl shadow-red-500/10"
+                className="group relative flex items-center justify-center gap-3 lg:gap-4 text-[10px] font-bold uppercase tracking-[0.2em] lg:tracking-[0.4em] text-white bg-[#EE1D23] px-6 py-4 lg:px-10 lg:py-5 rounded-full hover:bg-[#0F172A] transition-all duration-500 shadow-xl shadow-red-500/10 w-full sm:w-auto"
                 aria-label="Inscribirse a la academia de artes"
               >
                 Inscribirse a la Academia
@@ -123,7 +135,7 @@ const Hero = () => {
               </button>
 
               <button
-                className="group flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.4em] text-[#0F172A] hover:text-[#EE1D23] transition-colors border-b border-gray-200 pb-1"
+                className="group flex items-center justify-center gap-3 lg:gap-4 text-[10px] font-bold uppercase tracking-[0.2em] lg:tracking-[0.4em] text-[#0F172A] hover:text-[#EE1D23] transition-colors border-b border-gray-400 lg:border-gray-200 pb-1 w-full sm:w-auto mt-2 sm:mt-0"
                 aria-label="Ver servicios de restauración y arte público"
               >
                 Servicios de Restauración y Arte Público
@@ -136,9 +148,9 @@ const Hero = () => {
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-            className="relative h-full flex items-center justify-end group focus-within:ring-2 focus-within:ring-[#EE1D23]"
+            className="absolute inset-0 z-0 lg:relative lg:z-auto lg:h-full flex items-center justify-end group focus-within:ring-2 focus-within:ring-[#EE1D23]"
           >
-            <div className="relative w-full h-[80%] overflow-hidden">
+            <div className="relative w-full h-full lg:h-[80%] overflow-hidden">
               <Image
                 src="/images/home/hero-artista.webp"
                 alt="Artista del Atelier Colibrí Rojo trabajando en una restauración profesional"
@@ -146,7 +158,7 @@ const Hero = () => {
                 className="object-cover transition-transform duration-[3s] group-hover:scale-105"
                 priority
               />
-              <div className="absolute inset-0 bg-[#0F172A]/5" />
+              <div className="absolute inset-0 bg-[#FDFDFD]/85 lg:bg-[#0F172A]/5" />
             </div>
 
             {/* Editorial Floating Info */}
@@ -154,7 +166,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5, duration: 1 }}
-              className="absolute bottom-16 right-0 bg-[#0F172A] p-10 text-white min-w-[280px]"
+              className="hidden lg:block absolute bottom-16 right-0 bg-[#0F172A] p-10 text-white min-w-[280px]"
             >
               <div className="flex items-start gap-4 mb-4">
                 <Award size={20} strokeWidth={1} className="text-[#EE1D23]" />
@@ -175,7 +187,7 @@ const Hero = () => {
       </div>
 
       {/* Aesthetic Border: Editorial Lines */}
-      <div className="absolute bottom-0 left-0 w-full h-8 flex items-center px-8 border-t border-gray-100">
+      <div className="absolute bottom-0 left-0 w-full h-8 hidden lg:flex items-center px-8 border-t border-gray-100 z-20">
         <div className="flex items-center gap-10">
           <span className="text-[8px] font-bold text-gray-300 uppercase tracking-widest">Est. MMXXVI</span>
           <span className="text-[8px] font-bold text-gray-300 uppercase tracking-widest">Atelier Colibrí Rojo</span>

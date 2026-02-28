@@ -65,7 +65,7 @@ const VideoShowcase = () => {
                     onMouseLeave={() => setIsHovered(false)}
                     onClick={togglePlay}
                 >
-                    <div className="relative aspect-video rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-[0_30px_100px_-20px_rgba(15,23,42,0.15)] bg-gray-100">
+                    <div className="relative h-[550px] lg:h-auto lg:aspect-video rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-[0_30px_100px_-20px_rgba(15,23,42,0.15)] bg-gray-100">
 
                         {/* Poster / Thumbnail Image */}
                         <AnimatePresence>
@@ -98,12 +98,12 @@ const VideoShowcase = () => {
                             onPlay={() => setIsPlaying(true)}
                             onPause={() => setIsPlaying(false)}
                         >
-                            <source src="/videos/showreel.mp4" type="video/mp4" />
+                            <source src="/video/video.mp4" type="video/mp4" />
                             Tu navegador no soporta el elemento de video.
                         </video>
 
                         {/* Overlays: Storytelling */}
-                        <div className="absolute inset-0 z-20 pointer-events-none p-10 lg:p-16 flex flex-col justify-between">
+                        <div className="absolute inset-0 z-20 pointer-events-none p-6 lg:p-16 flex flex-col justify-between">
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: isPlaying ? 0.3 : 1, x: 0 }}
@@ -119,10 +119,10 @@ const VideoShowcase = () => {
                                 </h3>
                             </motion.div>
 
-                            <div className="flex justify-between items-end">
+                            <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-end gap-6 sm:gap-0">
                                 <motion.span
                                     animate={{ opacity: isPlaying ? 0 : 1 }}
-                                    className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/60"
+                                    className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/60 w-3/4 sm:w-auto"
                                 >
                                     Producción Audiovisual por Colibrí Rojo
                                 </motion.span>
@@ -163,8 +163,8 @@ const VideoShowcase = () => {
                                         />
 
                                         {/* Central Button */}
-                                        <div className="w-24 h-24 rounded-full bg-[#EE1D23] flex items-center justify-center shadow-2xl shadow-[#EE1D23]/40 border-[6px] border-white relative z-10 transition-transform group-hover:scale-110 duration-500">
-                                            <Play size={32} fill="white" className="text-white ml-2" />
+                                        <div className="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-[#EE1D23] flex items-center justify-center shadow-2xl shadow-[#EE1D23]/40 border-[4px] lg:border-[6px] border-white relative z-10 transition-transform group-hover:scale-110 duration-500">
+                                            <Play size={28} fill="white" className="text-white ml-1 lg:ml-2 lg:w-8 lg:h-8" />
                                         </div>
                                     </motion.div>
                                 )}

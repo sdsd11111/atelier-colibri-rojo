@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ShieldAlert, ArrowRight, Paintbrush, Hammer, Frame, Droplet, TreePine, Cog, Sparkles } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -9,6 +9,8 @@ import RestorationProcess from "@/components/RestorationProcess";
 import RestorationGalleryCTA from "@/components/RestorationGalleryCTA";
 
 export default function RestauracionPage() {
+    const [isExpanded, setIsExpanded] = useState(false);
+
     return (
         <main className="min-h-screen bg-[#FDFDFD] text-[#0F172A]">
             <Navbar />
@@ -52,9 +54,25 @@ export default function RestauracionPage() {
                             </h1>
 
                             {/* Subtítulo de Autoridad (El Dolor del Cliente) */}
-                            <p className="text-lg md:text-xl font-light text-white/70 leading-relaxed max-w-2xl mb-12 font-[family-name:var(--font-outfit)]">
-                                Más de 30 años de maestría técnica en la recuperación de bienes pictóricos y escultóricos. Devolvemos la vida a sus obras con <strong className="text-white font-normal">rigor histórico y respeto por el original.</strong>
-                            </p>
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                            >
+                                <p className="text-lg md:text-xl font-light text-white/70 leading-relaxed max-w-2xl mb-4 font-[family-name:var(--font-outfit)]">
+                                    Más de 30 años de maestría técnica en la recuperación de bienes pictóricos y escultóricos.
+                                    <span className={isExpanded ? "inline" : "hidden md:inline"}> Devolvemos la vida a sus obras con <strong className="text-white font-normal">rigor histórico y respeto por el original.</strong></span>
+                                </p>
+                                {!isExpanded && (
+                                    <button
+                                        onClick={() => setIsExpanded(true)}
+                                        className="md:hidden mt-2 mb-8 text-[11px] font-bold uppercase tracking-[0.2em] text-[#EE1D23] hover:text-white transition-colors flex items-center gap-2"
+                                        aria-label="Ver más información"
+                                    >
+                                        Seguir leyendo <ArrowRight size={12} strokeWidth={2} />
+                                    </button>
+                                )}
+                            </motion.div>
 
                             {/* CTA: Evaluación Técnica (Cirujano del arte) */}
                             <motion.button
