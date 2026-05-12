@@ -1,0 +1,74 @@
+/* Estilos Premium para el Contenido del Blog */
+.article-content {
+    font-family: var(--font-outfit);
+    color: #475569;
+    font-size: 1.125rem;
+    line-height: 1.75;
+}
+
+.article-content h2 {
+    font-family: var(--font-cinzel);
+    font-size: 1.875rem;
+    color: #0F172A;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.article-content p {
+    margin-bottom: 2rem;
+}
+
+/* Letra Capital (Drop Cap) - Selector reforzado */
+.article-content p:first-of-type::first-letter {
+    float: left;
+    font-family: var(--font-cinzel) !important;
+    font-size: 4.5rem !important;
+    line-height: 0.9 !important;
+    padding-right: 0.8rem !important;
+    margin-top: 0.2rem;
+    color: #EE1D23 !important;
+    font-weight: normal !important;
+    text-transform: uppercase !important;
+}
+
+.article-content blockquote {
+    border-left: 4px solid #EE1D23;
+    background-color: #F8FAFC;
+    padding: 2rem;
+    border-radius: 0 1rem 1rem 0;
+    font-style: italic;
+    margin: 3rem 0;
+    font-size: 1.25rem;
+    color: #0F172A;
+}
+
+/* Imágenes internas más pequeñas y elegantes */
+.article-content img {
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    margin: 3rem auto;
+    max-width: 70%; /* Reducido de 90% */
+    display: block;
+    height: auto;
+}
+
+/* Videos internos más pequeños */
+.article-content video {
+    border-radius: 1rem;
+    margin: 3rem auto;
+    max-width: 70%;
+    display: block;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+.article-content strong {
+    color: #0F172A;
+    font-weight: 700;
+}
+
+@media (min-width: 1024px) {
+    .article-content img, 
+    .article-content video {
+        max-width: 60%; /* Aún más pequeño en desktop */
+    }
+}

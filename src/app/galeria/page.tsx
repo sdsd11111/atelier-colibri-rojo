@@ -6,18 +6,18 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { LayoutGrid } from "lucide-react";
 
-const CATEGORIES = ["Todas", "Restauración", "Escultura Monumental", "Muralismo", "Audiovisual", "Academia"];
+const CATEGORIES = ["Todas", "Restauración", "Escultura Monumental", "Muralismo", "Artes Plásticas"];
 
 const ARTWORKS = [
     { id: 1, title: "Restauración Óleo sobre Lienzo", category: "Restauración", year: 2023, technique: "Conservación pictórica", image: "/images/galeria/restauracion-1.webp", size: "tall" },
     { id: 2, title: "Mural Plaza de la Cultura", category: "Muralismo", year: 2022, technique: "Acrílico Mural + UV", image: "/images/galeria/muralismo-1.webp", size: "wide" },
     { id: 3, title: "Escultura Identidad Lojana", category: "Escultura Monumental", year: 2021, technique: "Fibra de Vidrio Policromada", image: "/images/galeria/escultura-1.webp", size: "normal" },
-    { id: 4, title: "Spot Corporativo — Branding", category: "Audiovisual", year: 2024, technique: "4K + Color Grading", image: "/images/galeria/audiovisual-1.webp", size: "normal" },
-    { id: 5, title: "Clase Magistral de Acuarela", category: "Academia", year: 2023, technique: "Formación Artística", image: "/images/galeria/academia-1.webp", size: "normal" },
+    { id: 4, title: "Estudio de Personaje", category: "Artes Plásticas", year: 2024, technique: "Óleo sobre Lienzo", image: "/images/galeria/academia-1.webp", size: "normal" },
+    { id: 5, title: "Naturaleza Muerta", category: "Artes Plásticas", year: 2023, technique: "Acuarela sobre Papel", image: "/images/galeria/audiovisual-1.webp", size: "normal" },
     { id: 6, title: "Mural Raíces del Sur", category: "Muralismo", year: 2023, technique: "Aerografía + Acrílico", image: "/images/galeria/muralismo-2.webp", size: "tall" },
     { id: 7, title: "Restauración Retablo Colonial", category: "Restauración", year: 2020, technique: "Consolidación + Reintegración", image: "/images/galeria/restauracion-2.webp", size: "normal" },
     { id: 8, title: "Monumento Parque Lineal", category: "Escultura Monumental", year: 2022, technique: "Cemento + Acero", image: "/images/galeria/escultura-2.webp", size: "wide" },
-    { id: 9, title: "Documental Artesanías de Loja", category: "Audiovisual", year: 2024, technique: "Documental Narrativo 4K", image: "/images/galeria/audiovisual-2.webp", size: "normal" },
+    { id: 9, title: "Torso en Movimiento", category: "Artes Plásticas", year: 2024, technique: "Escultura en Resina", image: "/images/galeria/audiovisual-2.webp", size: "normal" },
 ];
 
 export default function GaleriaPage() {
@@ -46,9 +46,7 @@ export default function GaleriaPage() {
                             <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal text-[#0F172A] font-[family-name:var(--font-cinzel)] leading-[1.05]">
                                 Exhibición <br className="hidden lg:block" /> Atelier Colibrí Rojo
                             </h1>
-                            <p className="mt-4 text-lg md:text-xl font-light text-[#0F172A]/50 font-[family-name:var(--font-outfit)] max-w-2xl leading-relaxed">
-                                El Legado de la Maestría y la Creatividad. Una colección que celebra décadas de arte, restauración y producción visual en el sur del Ecuador.
-                            </p>
+                                El Legado de la Maestría y la Creatividad. Una colección que celebra décadas de arte, restauración y escultura monumental en el corazón cultural del Ecuador.
                         </div>
 
                         <div className="text-right hidden lg:block">

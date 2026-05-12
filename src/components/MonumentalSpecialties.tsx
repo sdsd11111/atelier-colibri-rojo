@@ -2,151 +2,116 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { ArrowRight, Landmark, Building2, Palmtree } from "lucide-react";
+
+const disciplines = [
+    {
+        num: "01",
+        label: "Pintura Mural",
+        heading: "Muralismo de Gran Formato e Identidad",
+        body: "Intervención de fachadas urbanas y espacios corporativos. Creamos narrativas visuales que integran la identidad de la institución con su entorno geográfico.",
+        tags: ["Fachadas Públicas", "Sedes Corporativas", "Pintura Técnica"],
+        image: "/images/monumental/especialidad-muralismo.webp",
+        imagePosition: "right"
+    },
+    {
+        num: "02",
+        label: "Escultura",
+        heading: "Escultura Monumental y Monumentos",
+        body: "Diseño y ejecución de obras escultóricas para plazas, parques y rotondas. Expertos en materiales de alta resistencia para el clima de Ecuador.",
+        tags: ["Fundición en Metal", "Fibra de Vidrio", "Hormigón Artístico"],
+        image: "/images/monumental/especialidad-escultura.webp",
+        imagePosition: "left"
+    },
+    {
+        num: "03",
+        label: "Diseño",
+        heading: "Mobiliario Artístico y Urbanismo",
+        body: "Conceptualización de elementos funcionales que son piezas de arte. Mobiliario urbano que dignifica el espacio y mejora la experiencia del ciudadano.",
+        tags: ["Mobiliario Urbano", "Escenografías", "Intervención de Espacios"],
+        image: "/images/monumental/proyecto-1.webp",
+        imagePosition: "right"
+    }
+];
 
 export default function MonumentalSpecialties() {
     return (
-        <section className="bg-white py-24 lg:py-40 overflow-hidden font-[family-name:var(--font-outfit)]">
-            <div className="container mx-auto px-6 lg:px-12">
+        <section className="bg-white overflow-hidden font-[family-name:var(--font-outfit)]">
 
-                {/* Header Section */}
-                <div className="text-center max-w-3xl mx-auto mb-20 lg:mb-32">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-6 block">Especialidades</span>
-                    <h2 className="text-3xl md:text-5xl font-normal text-[#0F172A] mb-8 font-[family-name:var(--font-cinzel)] leading-tight">
-                        Disciplinas de Intervención Urbana
-                    </h2>
-                    <p className="text-lg font-light text-[#0F172A]/60 leading-relaxed md:text-xl">
-                        Aterrizamos la idea de "esculpir la identidad" en hechos concretos y duraderos, estructurando nuestro trabajo en dos grandes ejes de desarrollo monumental.
-                    </p>
-                </div>
-
-                <div className="space-y-32 lg:space-y-48">
-
-                    {/* Especialidad 1: Escultura Monumental */}
-                    <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24 relative">
-                        {/* Decorative Line Architectural */}
-                        <div className="hidden lg:block absolute top-0 bottom-0 left-[50%] w-[1px] bg-gray-100 -translate-x-1/2 -z-10" />
-
-                        {/* Image Block (Left) */}
-                        <div className="w-full lg:w-1/2">
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 1, ease: "easeOut" }}
-                                className="relative aspect-[4/3] rounded-[2rem] overflow-hidden group shadow-2xl shadow-gray-200"
-                            >
-                                <div
-                                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
-                                    style={{ backgroundImage: "url('/images/monumental/especialidad-escultura.webp')" }}
-                                />
-                                <div className="absolute inset-0 bg-[#0F172A]/5 group-hover:bg-transparent transition-colors duration-500" />
-
-                                {/* Badge Overlay */}
-                                <div className="absolute bottom-6 left-6 px-6 py-3 bg-white/90 backdrop-blur-md rounded-2xl border border-gray-100 shadow-xl">
-                                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0F172A]">01. Escultura Monumental</span>
-                                </div>
-                            </motion.div>
+            {/* Public + Private Strip — Minimal */}
+            <div className="border-b border-gray-100 py-16 px-6 lg:px-16 bg-gray-50/50">
+                <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+                    <div className="flex flex-col">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-4">Alcance del Atelier</span>
+                        <h2 className="text-3xl md:text-4xl font-medium text-[#0F172A] font-[family-name:var(--font-cinzel)] leading-tight">
+                            Soluciones de Autor para <br/> Instituciones y Gobiernos
+                        </h2>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-8 md:gap-12">
+                        <div className="flex items-center gap-4">
+                            <Landmark className="text-[#EE1D23]" size={24} />
+                            <p className="text-sm font-bold uppercase tracking-widest text-[#0F172A]/60">Público</p>
                         </div>
-
-                        {/* Text Block (Right) */}
-                        <div className="w-full lg:w-1/2 flex flex-col items-start bg-white z-10 lg:pl-8">
-                            <div className="flex items-center gap-4 mb-6">
-                                <span className="text-4xl font-light text-gray-200 font-[family-name:var(--font-cinzel)]">01</span>
-                                <div className="w-12 h-[1px] bg-[#EE1D23]" />
-                            </div>
-
-                            <h3 className="text-3xl lg:text-5xl font-normal text-[#0F172A] mb-8 font-[family-name:var(--font-cinzel)] leading-tight">
-                                Íconos en Tres Dimensiones
-                            </h3>
-
-                            <p className="text-lg lg:text-xl font-light text-[#0F172A]/70 leading-relaxed mb-10">
-                                Desarrollamos monumentos que resisten el paso del tiempo y las inclemencias del clima. Ejecutamos un control riguroso desde la concepción del boceto a escala, el modelado estructural, hasta la fundición e instalación final en su emplazamiento.
-                            </p>
-
-                            <div className="w-full border-t border-gray-100 pt-8 mt-4">
-                                <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0F172A]/40 mb-6">Materiales de Alta Durabilidad</h4>
-                                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    {[
-                                        "Fibra de Vidrio reforzada",
-                                        "Cera y Resinas Poliéster",
-                                        "Cemento Escultórico",
-                                        "Estructuras de Metal"
-                                    ].map((mat, idx) => (
-                                        <li key={idx} className="flex items-center gap-3 text-[#0F172A]/80 font-light text-sm lg:text-base">
-                                            <Sparkles size={14} className="text-[#EE1D23]" />
-                                            {mat}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                        <div className="flex items-center gap-4">
+                            <Building2 className="text-[#EE1D23]" size={24} />
+                            <p className="text-sm font-bold uppercase tracking-widest text-[#0F172A]/60">Corporativo</p>
+                        </div>
+                        <div className="flex items-center gap-4">
+                            <Palmtree className="text-[#EE1D23]" size={24} />
+                            <p className="text-sm font-bold uppercase tracking-widest text-[#0F172A]/60">Urbano</p>
                         </div>
                     </div>
-
-                    {/* Especialidad 2: Muralismo y Arte de Gran Formato */}
-                    <div className="flex flex-col lg:flex-row-reverse items-center gap-16 lg:gap-24 relative">
-                        {/* Decorative Line Architectural */}
-                        <div className="hidden lg:block absolute top-0 bottom-0 left-[50%] w-[1px] bg-gray-100 -translate-x-1/2 -z-10" />
-
-                        {/* Image Block (Right) */}
-                        <div className="w-full lg:w-1/2">
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-                                className="relative aspect-[4/3] rounded-[2rem] overflow-hidden group shadow-2xl shadow-gray-200"
-                            >
-                                <div
-                                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
-                                    style={{ backgroundImage: "url('/images/monumental/especialidad-muralismo.webp')" }}
-                                />
-                                <div className="absolute inset-0 bg-[#0F172A]/5 group-hover:bg-transparent transition-colors duration-500" />
-
-                                {/* Badge Overlay */}
-                                <div className="absolute bottom-6 right-6 px-6 py-3 bg-[#0F172A]/90 backdrop-blur-md rounded-2xl shadow-xl">
-                                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">02. Muralismo</span>
-                                </div>
-                            </motion.div>
-                        </div>
-
-                        {/* Text Block (Left) */}
-                        <div className="w-full lg:w-1/2 flex flex-col items-start bg-white z-10 lg:pr-8">
-                            <div className="flex items-center gap-4 mb-6">
-                                <span className="text-4xl font-light text-gray-200 font-[family-name:var(--font-cinzel)]">02</span>
-                                <div className="w-12 h-[1px] bg-[#EE1D23]" />
-                            </div>
-
-                            <h3 className="text-3xl lg:text-5xl font-normal text-[#0F172A] mb-8 font-[family-name:var(--font-cinzel)] leading-tight">
-                                Narrativas Pictóricas Urbanas
-                            </h3>
-
-                            <p className="text-lg lg:text-xl font-light text-[#0F172A]/70 leading-relaxed mb-10">
-                                Intervención de fachadas, muros de contención y espacios públicos mediante murales de gran formato que cuentan las historias de nuestro territorio. Usamos pigmentos especializados para garantizar la vivacidad del color ante la radiación solar extrema.
-                            </p>
-
-                            <div className="w-full border-t border-gray-100 pt-8 mt-4">
-                                <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0F172A]/40 mb-6">Técnicas y Acabados Especiales</h4>
-                                <ul className="flex flex-col gap-4">
-                                    {[
-                                        "Pintura con Acrílico Técnico Profesional",
-                                        "Aerografía de Alta Precisión y Detalle",
-                                        "Sellado Integral con Recubrimientos Protectores UV"
-                                    ].map((tech, idx) => (
-                                        <li key={idx} className="flex items-center gap-4 text-[#0F172A]/80 font-light text-sm lg:text-base">
-                                            <div className="p-1 rounded-full bg-gray-50 border border-gray-200">
-                                                <ArrowRight size={14} className="text-[#EE1D23]" />
-                                            </div>
-                                            {tech}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
+
+            {/* Disciplines — 30/70 Split */}
+            {disciplines.map((d) => (
+                <div key={d.num} className={`flex flex-col ${d.imagePosition === "left" ? "lg:flex-row-reverse" : "lg:flex-row"} min-h-[85vh] border-b border-gray-50`}>
+
+                    {/* Text Panel — 30% */}
+                    <motion.div
+                        initial={{ opacity: 0, x: d.imagePosition === "left" ? 40 : -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                        className="w-full lg:w-[30%] flex flex-col justify-center px-10 lg:px-16 py-20 lg:py-0 bg-[#FDFDFD]"
+                    >
+                        <span className="text-[120px] font-thin text-gray-100 font-[family-name:var(--font-cinzel)] leading-none select-none block -ml-4">{d.num}</span>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-4 block">{d.label}</span>
+                        <h3 className="text-3xl lg:text-4xl font-normal text-[#0F172A] font-[family-name:var(--font-cinzel)] leading-tight mb-8">
+                            {d.heading}
+                        </h3>
+                        <p className="text-base font-normal text-[#0F172A]/60 leading-relaxed mb-10">
+                            {d.body}
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-12">
+                            {d.tags.map(tag => (
+                                <span key={tag} className="px-4 py-2 rounded-lg bg-gray-50 border border-gray-100 text-[9px] font-bold uppercase tracking-widest text-[#0F172A]/50">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                        <a href="#cotizar" className="group inline-flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] transition-all">
+                            CONOCER MÁS <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform" />
+                        </a>
+                    </motion.div>
+
+                    {/* Image Panel — 70% */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.5, ease: "easeOut" }}
+                        className="w-full lg:w-[70%] relative min-h-[50vh] lg:min-h-0 overflow-hidden group"
+                    >
+                        <div
+                            className="absolute inset-0 bg-cover bg-center transition-transform duration-[3000ms] group-hover:scale-105"
+                            style={{ backgroundImage: `url('${d.image}')` }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity" />
+                    </motion.div>
+                </div>
+            ))}
         </section>
     );
 }

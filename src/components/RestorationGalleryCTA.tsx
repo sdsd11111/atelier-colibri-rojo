@@ -48,8 +48,8 @@ export default function RestorationGalleryCTA() {
                         <h2 className="text-3xl md:text-5xl font-normal text-[#0F172A] mb-8 font-[family-name:var(--font-cinzel)] leading-tight">
                             El Milagro de la Restauración
                         </h2>
-                        <p className="text-lg font-light text-[#0F172A]/70 font-[family-name:var(--font-outfit)]">
-                            Vea cómo la dedicación técnica puede hacer retroceder el desgaste del tiempo. Deslice para ver el antes y después de nuestras intervenciones.
+                        <p className="text-lg md:text-xl font-normal text-[#0F172A]/80 font-[family-name:var(--font-outfit)] leading-relaxed">
+                            Vea cómo la dedicación técnica puede hacer retroceder el desgaste del tiempo. Deslice para ver el antes y después de nuestras intervenciones en imaginería sacra y pintura histórica.
                         </p>
                     </div>
 
@@ -95,10 +95,10 @@ export default function RestorationGalleryCTA() {
                                         </div>
                                     </div>
                                 </div>
-                                <h3 className="text-xl font-normal text-[#0F172A] font-[family-name:var(--font-cinzel)] mb-3 pr-4 group-hover:text-[#EE1D23] transition-colors">
+                                <h3 className="text-lg font-normal text-[#0F172A] font-[family-name:var(--font-cinzel)] mb-3 group-hover:text-[#EE1D23] transition-colors leading-tight">
                                     {item.title}
                                 </h3>
-                                <div className="w-12 h-[1px] bg-[#EE1D23]/30 group-hover:bg-[#EE1D23] transition-colors" />
+                                <div className="w-8 h-[1px] bg-[#EE1D23]/30 group-hover:bg-[#EE1D23] transition-colors" />
                             </motion.div>
                         ))}
                     </div>
@@ -135,8 +135,8 @@ export default function RestorationGalleryCTA() {
                             <h2 className="text-3xl md:text-5xl font-normal text-[#0F172A] mb-4 font-[family-name:var(--font-cinzel)]">
                                 Solicite una Evaluación Técnica
                             </h2>
-                            <p className="text-[#0F172A]/60 font-[family-name:var(--font-outfit)] text-lg">
-                                Complete los detalles de la obra y nuestro especialista se pondrá en contacto para programar el diagnóstico.
+                            <p className="text-[#0F172A]/70 font-normal font-[family-name:var(--font-outfit)] text-base md:text-lg">
+                                Inicie el proceso de recuperación de su patrimonio con un diagnóstico técnico especializado.
                             </p>
                         </div>
 

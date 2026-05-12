@@ -31,10 +31,10 @@ const Footer = () => {
                                 Preservando el pasado y esculpiendo el futuro. Nodo de soluciones creativas integrales con trayectoria internacional.
                             </p>
                             <div className="flex gap-8">
-                                <a href="#" className="text-white/40 hover:text-[#EE1D23] transition-colors" aria-label="Visitar Instagram del Atelier">
+                                <a href="https://www.instagram.com/ateliercolibrirojo/" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-[#EE1D23] transition-colors" aria-label="Visitar Instagram del Atelier">
                                     <Instagram size={18} strokeWidth={1} />
                                 </a>
-                                <a href="#" className="text-white/40 hover:text-[#EE1D23] transition-colors" aria-label="Visitar Facebook del Atelier">
+                                <a href="https://www.facebook.com/atelier.colibrirojo/" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-[#EE1D23] transition-colors" aria-label="Visitar Facebook del Atelier">
                                     <Facebook size={18} strokeWidth={1} />
                                 </a>
                             </div>
@@ -42,12 +42,20 @@ const Footer = () => {
                     </div>
 
                     {/* Links */}
-                    <nav aria-label="Servicios profesionales" className="flex flex-col items-center md:items-start text-center md:text-left">
-                        <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-10 block">Servicios</span>
+                    <nav aria-label="Navegación y Servicios" className="flex flex-col items-center md:items-start text-center md:text-left">
+                        <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-10 block">Explorar</span>
                         <ul className="space-y-4">
-                            {["Arte Público (Muralismo/Escultura)", "Restauración Profesional", "Producción Audiovisual", "Academia de Artes Plásticas"].map(service => (
-                                <li key={service} className="text-[10px] font-normal tracking-[0.1em] text-white/60">
-                                    {service}
+                            {[
+                                { name: "Arte Público & Monumental", href: "/arte-monumental" },
+                                { name: "Restauración Profesional", href: "/restauracion-de-obra" },
+                                { name: "Artes Plásticas & Cuadros", href: "/artes-plasticas" },
+                                { name: "Ambientación & Renders", href: "/varios" },
+                                { name: "Blog de Maestría", href: "/blog" }
+                            ].map(link => (
+                                <li key={link.name}>
+                                    <a href={link.href} className="text-[10px] font-normal tracking-[0.1em] text-white/60 hover:text-[#EE1D23] transition-colors">
+                                        {link.name}
+                                    </a>
                                 </li>
                             ))}
                         </ul>
@@ -87,7 +95,7 @@ const Footer = () => {
                 {/* Legal */}
                 <div className="flex flex-col md:flex-row items-center justify-between pt-12 border-t border-white/10 gap-6 md:gap-0">
                     <p className="text-[9px] font-bold text-white/40 uppercase tracking-widest text-center md:text-left">
-                        Sello de Excelencia Artística Lojana.
+                        Diseñado por <a href="https://www.cesarreyesjaramillo.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors underline underline-offset-4 decoration-white/20">Cesar Reyes</a> | Atelier Colibri rojo 2026
                     </p>
                     <div className="flex gap-10 mt-2 md:mt-0">
                         <a href="/privacidad" className="text-[8px] font-bold text-white/40 uppercase tracking-widest hover:text-[#EE1D23] transition-colors" aria-label="Ver política de privacidad">Privacidad</a>

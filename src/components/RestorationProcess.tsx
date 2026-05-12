@@ -1,100 +1,68 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 
 const processSteps = [
     {
         num: "01",
-        title: "Diagnóstico y Análisis",
-        desc: "Evaluamos el estado de conservación, identificando daños estructurales, xilófagos o desprendimientos de capa pictórica.",
+        title: "Diagnóstico",
+        desc: "Evaluación científica del estado de conservación.",
         image: "/images/restauracion/proceso-1.webp"
     },
     {
         num: "02",
-        title: "Limpieza y Consolidación",
-        desc: "Eliminación de barnices oxidados y suciedad acumulada. Consolidamos el soporte (madera, lienzo o resina) para detener el deterioro.",
+        title: "Consolidación",
+        desc: "Limpieza y estabilización estructural del soporte.",
         image: "/images/restauracion/proceso-2.webp"
     },
     {
         num: "03",
-        title: "Reintegración y Acabado",
-        desc: "Reposición de faltantes mediante técnicas que respetan la estética original, asegurando una transición invisible entre lo antiguo y lo restaurado.",
+        title: "Reintegración",
+        desc: "Reposición estética con absoluto respeto al original.",
         image: "/images/restauracion/proceso-3.webp"
     }
 ];
 
 export default function RestorationProcess() {
-    const [activeTab, setActiveTab] = useState(0);
-
     return (
-        <section className="py-24 lg:py-32 bg-[#FDFDFD] relative overflow-hidden">
-            <div className="container mx-auto px-6 lg:px-12">
-                {/* Header */}
-                <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-6 block">Estudio Técnico</span>
-                    <h2 className="text-3xl md:text-5xl font-normal text-[#0F172A] mb-8 font-[family-name:var(--font-cinzel)] leading-tight">
-                        Proceso de Intervención
-                    </h2>
-                    <p className="text-lg font-light text-[#0F172A]/70 font-[family-name:var(--font-outfit)] leading-relaxed">
-                        Abordamos cada pieza con rigor metodológico y científico. Nuestra intervención se divide en tres fases fundamentales, garantizando la preservación total del bien sin alteraciones a su identidad original.
-                    </p>
-                </div>
+        <section className="bg-[#0a0a0a] py-24 lg:py-32 overflow-hidden">
+            <div className="container mx-auto px-6 lg:px-16 mb-20">
+                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-6 block">Rigor Técnico</span>
+                <h2 className="text-3xl md:text-5xl font-normal text-white font-[family-name:var(--font-cinzel)] leading-tight">
+                    El Proceso de Restauración
+                </h2>
+            </div>
 
-                {/* Tabs Selector */}
-                <div className="flex flex-col md:flex-row justify-center gap-4 mb-16 lg:mb-24">
-                    {processSteps.map((step, index) => (
-                        <button
-                            key={step.num}
-                            onClick={() => setActiveTab(index)}
-                            className={`flex justify-center items-center gap-3 px-8 py-4 rounded-full transition-all duration-300 ${activeTab === index
-                                ? "bg-[#EE1D23] text-white shadow-lg shadow-[#EE1D23]/30"
-                                : "bg-white text-[#0F172A]/60 hover:text-[#0F172A] hover:bg-gray-50 border border-gray-100"
-                                }`}
-                        >
-                            <span className="font-bold text-sm font-[family-name:var(--font-outfit)] opacity-80">{step.num}</span>
-                            <span className="font-normal text-sm md:text-base font-[family-name:var(--font-cinzel)] whitespace-nowrap">{step.title}</span>
-                        </button>
-                    ))}
-                </div>
+            <div className="flex flex-col lg:flex-row gap-4 px-4 lg:px-8 h-auto lg:h-[70vh]">
+                {processSteps.map((step, idx) => (
+                    <motion.div
+                        key={step.num}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: idx * 0.2 }}
+                        className="relative flex-1 group overflow-hidden rounded-[2.5rem] min-h-[400px] lg:min-h-0"
+                    >
+                        {/* Background Image — 100% of card */}
+                        <div 
+                            className="absolute inset-0 bg-cover bg-center transition-transform duration-[1500ms] group-hover:scale-110"
+                            style={{ backgroundImage: `url('${step.image}')` }}
+                        />
+                        
+                        {/* Overlay — dark gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
 
-                {/* Tab Content */}
-                <div className="w-full max-w-6xl mx-auto">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeTab}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ duration: 0.4, ease: "easeOut" }}
-                            className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20"
-                        >
-                            {/* Text Column */}
-                            <div className="w-full lg:w-1/2 flex flex-col items-start order-2 lg:order-1">
-                                <div className="w-16 h-16 rounded-full bg-[#EE1D23]/10 flex items-center justify-center text-[#EE1D23] font-bold text-xl mb-8 font-[family-name:var(--font-outfit)]">
-                                    {processSteps[activeTab].num}
-                                </div>
-                                <h3 className="text-3xl lg:text-4xl font-normal text-[#0F172A] mb-6 font-[family-name:var(--font-cinzel)] leading-tight">
-                                    {processSteps[activeTab].title}
-                                </h3>
-                                <p className="text-lg lg:text-xl font-light text-[#0F172A]/70 leading-relaxed font-[family-name:var(--font-outfit)]">
-                                    {processSteps[activeTab].desc}
-                                </p>
-                            </div>
-
-                            {/* Image Column */}
-                            <div className="w-full lg:w-1/2 order-1 lg:order-2">
-                                <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden group shadow-2xl shadow-gray-200">
-                                    <div
-                                        className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
-                                        style={{ backgroundImage: `url('${processSteps[activeTab].image}')` }}
-                                    />
-                                    <div className="absolute inset-0 bg-[#0F172A]/10 group-hover:bg-transparent transition-colors duration-500" />
-                                </div>
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
+                        {/* Content — minimal (20% of vertical space) */}
+                        <div className="absolute bottom-0 left-0 w-full p-8 lg:p-12 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <span className="text-[40px] font-thin text-white/20 font-[family-name:var(--font-cinzel)] block mb-2">{step.num}</span>
+                            <h3 className="text-2xl font-normal text-white font-[family-name:var(--font-cinzel)] mb-3">{step.title}</h3>
+                            <p className="text-sm font-normal text-white/60 font-[family-name:var(--font-outfit)] leading-relaxed max-w-[250px] opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                {step.desc}
+                            </p>
+                        </div>
+                    </motion.div>
+                ))}
             </div>
         </section>
     );

@@ -193,10 +193,10 @@ const ContactAndLocation = () => {
                                     className="w-full bg-gray-50/50 border-b border-gray-200 py-4 px-0 outline-none focus:border-[#EE1D23] transition-colors appearance-none cursor-pointer text-[#0F172A] font-light"
                                 >
                                     <option value="" disabled hidden></option>
-                                    <option value="academia">Inscripción Academia ($50)</option>
+                                    <option value="varios">Varios / Otros Servicios</option>
                                     <option value="restauracion">Restauración de Obra</option>
                                     <option value="arte-publico">Arte Público / Muralismo</option>
-                                    <option value="audiovisual">Producción Audiovisual</option>
+                                    <option value="artes-plasticas">Artes Plásticas (Pintura/Escultura)</option>
                                 </select>
                                 <label
                                     htmlFor="interest"

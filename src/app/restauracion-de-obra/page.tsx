@@ -1,221 +1,263 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { ShieldAlert, ArrowRight, Paintbrush, Hammer, Frame, Droplet, TreePine, Cog, Sparkles } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ShieldAlert, ArrowRight, ArrowLeftRight, ChevronRight, ChevronLeft, Microscope } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import RestorationSpecialties from "@/components/RestorationSpecialties";
 import RestorationProcess from "@/components/RestorationProcess";
 import RestorationGalleryCTA from "@/components/RestorationGalleryCTA";
 
+/* ─────────────────────────────────────────────
+   Datos de la galería
+───────────────────────────────────────────── */
+const antesDesques = [
+  {
+    id: 1,
+    label: "Obra 01",
+    antes: "/images/restauracion/antes-1.webp",
+    despues: "/images/restauracion/despues-1.webp",
+    desc: "Intervención pictórica sobre lienzo",
+  },
+  {
+    id: 2,
+    label: "Obra 02",
+    antes: "/images/restauracion/antes-2.webp",
+    despues: "/images/restauracion/despues-2.webp",
+    desc: "Restauración de obra sacra",
+  },
+  {
+    id: 3,
+    label: "Obra 03",
+    antes: "/images/restauracion/antes-3.webp",
+    despues: "/images/restauracion/despues-3.webp",
+    desc: "Recuperación de pigmento y soporte",
+  },
+  {
+    id: 4,
+    label: "Obra 04",
+    antes: "/images/restauracion/antes-1.webp",
+    despues: "/images/galeria/restauracion-1.webp",
+    desc: "Limpieza y consolidación de policromía",
+  },
+  {
+    id: 5,
+    label: "Obra 05",
+    antes: "/images/restauracion/antes-2.webp",
+    despues: "/images/galeria/restauracion-2.webp",
+    desc: "Tratamiento de soporte y reintegración",
+  },
+];
+
+const procesoImages = [
+  { src: "/images/restauracion/proceso-1.webp", caption: "Diagnóstico y análisis de daños" },
+  { src: "/images/restauracion/proceso-2.webp", caption: "Intervención técnica en laboratorio" },
+  { src: "/images/restauracion/proceso-3.webp", caption: "Consolidación y acabado final" },
+  { src: "/images/galeria/restauracion-1.webp", caption: "Estudio de pigmentos originales" },
+  { src: "/images/galeria/restauracion-2.webp", caption: "Proceso de reintegración cromática" },
+];
+
+function AntesDesquesCard({ item }: { item: typeof antesDesques[0] }) {
+  const [showAfter, setShowAfter] = useState(false);
+
+  return (
+    <div className="relative flex-shrink-0 w-[85vw] md:w-[450px] lg:w-[500px] aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-[#111] shadow-2xl group select-none">
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={showAfter ? "despues" : "antes"}
+          src={showAfter ? item.despues : item.antes}
+          alt={item.desc}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4 }}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        />
+      </AnimatePresence>
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+
+      <div className="absolute top-8 left-8 z-10">
+        <span
+          className={`px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] rounded-full backdrop-blur-md border ${
+            showAfter
+              ? "bg-[#EE1D23] border-[#EE1D23] text-white"
+              : "bg-white/10 border-white/20 text-white"
+          }`}
+        >
+          {showAfter ? "Intervención Lograda" : "Estado Original"}
+        </span>
+      </div>
+
+      <div className="absolute bottom-10 left-10 right-10 z-10">
+        <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 mb-2">
+          {item.label}
+        </p>
+        <h3 className="text-xl text-white font-light font-[family-name:var(--font-cinzel)] mb-6">
+          {item.desc}
+        </h3>
+        
+        <button
+          onPointerDown={(e) => e.stopPropagation()}
+          onClick={() => setShowAfter((v) => !v)}
+          className="flex items-center gap-3 px-6 py-3 bg-white/10 hover:bg-white text-white hover:text-[#0F172A] rounded-xl transition-all duration-300 backdrop-blur-md border border-white/20"
+        >
+          <ArrowLeftRight size={14} />
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Comparar Estados</span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function RestauracionPage() {
-    const [isExpanded, setIsExpanded] = useState(false);
+  const [activeTab, setActiveTab] = useState<"comparativa" | "proceso">("comparativa");
+  const [width, setWidth] = useState(0);
+  const carousel = useRef<HTMLDivElement>(null);
 
-    return (
-        <main className="min-h-screen bg-[#FDFDFD] text-[#0F172A]">
-            <Navbar />
+  useEffect(() => {
+    if (carousel.current) {
+      setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+    }
+  }, [activeTab]);
 
-            {/* Sección 1: Hero de Especialidad (Confianza Extrema) */}
-            <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#111111] pt-20">
-                {/* Imagen de fondo con temática de restauración (Placeholder de alta calidad) */}
-                <div
-                    className="absolute inset-0 bg-cover bg-center -z-20 scale-105"
-                    style={{
-                        backgroundImage: `url('/images/restauracion/hero-restauracion.webp')`,
-                        backgroundAttachment: 'fixed'
-                    }}
-                />
+  return (
+    <main className="min-h-screen bg-[#FDFDFD] text-[#0F172A]">
+      <Navbar />
 
-                {/* Overlay oscuro (Capa de legibilidad 'Graphite Black') */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#111111]/80 to-[#111111]/60 -z-10" />
+      {/* ── HERO OPTIMIZADO PARA BUSQUEDAS EN ECUADOR ── */}
+      <section className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden bg-[#111111]">
+        <div className="w-full lg:w-[55%] flex flex-col justify-center px-6 lg:px-20 pt-32 pb-20 lg:py-0 z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 border border-white/10 rounded-full bg-white/5 backdrop-blur-sm">
+              <Microscope size={14} className="text-[#EE1D23]" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80 font-[family-name:var(--font-outfit)]">
+                Especialistas Certificados
+              </span>
+            </div>
 
-                <div className="container mx-auto px-6 lg:px-12 relative z-10">
-                    <div className="max-w-4xl">
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        >
-                            {/* Badge de Autoridad */}
-                            <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 border border-white/20 rounded-full bg-white/5 backdrop-blur-sm">
-                                <ShieldAlert size={14} className="text-[#EE1D23]" />
-                                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/90">
-                                    Intervención Profesional en Óleos, Madera y Resina
-                                </span>
-                            </div>
+            {/* H1 SEO - Ahora es el título principal */}
+            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-normal text-white leading-[1.0] mb-12 font-[family-name:var(--font-cinzel)] tracking-tight">
+              Restauración de Obras de Arte <br className="hidden lg:block"/>
+              <span className="text-white/30 italic font-light">en Ecuador.</span>
+            </h1>
 
-                            {/* H1 Principal (SEO Local + Maestría) */}
-                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal text-white leading-[1.1] mb-8 font-[family-name:var(--font-cinzel)] tracking-tight">
-                                Restauración Profesional en Loja:
-                                <br className="hidden md:block" />
-                                <span className="text-white/70 italic text-3xl md:text-5xl lg:text-6xl block mt-2">
-                                    Preservando el Patrimonio y el Legado Artístico
-                                </span>
-                            </h1>
+            {/* Lema de Brian - Se mantiene como sello de marca */}
+            <div className="border-l-2 border-[#EE1D23] pl-8 mb-14 py-2">
+               <p className="text-xl md:text-2xl font-light text-white/60 italic leading-relaxed font-[family-name:var(--font-cinzel)]">
+                 "Repárame, restáurame, mantenme vivo."
+               </p>
+               <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/20 mt-4">Lema del Atelier</p>
+            </div>
 
-                            {/* Subtítulo de Autoridad (El Dolor del Cliente) */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                            >
-                                <p className="text-lg md:text-xl font-light text-white/70 leading-relaxed max-w-2xl mb-4 font-[family-name:var(--font-outfit)]">
-                                    Más de 30 años de maestría técnica en la recuperación de bienes pictóricos y escultóricos.
-                                    <span className={isExpanded ? "inline" : "hidden md:inline"}> Devolvemos la vida a sus obras con <strong className="text-white font-normal">rigor histórico y respeto por el original.</strong></span>
-                                </p>
-                                {!isExpanded && (
-                                    <button
-                                        onClick={() => setIsExpanded(true)}
-                                        className="md:hidden mt-2 mb-8 text-[11px] font-bold uppercase tracking-[0.2em] text-[#EE1D23] hover:text-white transition-colors flex items-center gap-2"
-                                        aria-label="Ver más información"
-                                    >
-                                        Seguir leyendo <ArrowRight size={12} strokeWidth={2} />
-                                    </button>
-                                )}
-                            </motion.div>
+            <p className="text-base text-white/40 max-w-lg mb-12 font-[family-name:var(--font-outfit)] leading-relaxed">
+              Intervención científica en formatos bi y tridimensionales con rigor absoluto. Preservamos el patrimonio artístico e histórico nacional.
+            </p>
 
-                            {/* CTA: Evaluación Técnica (Cirujano del arte) */}
-                            <motion.button
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="group inline-flex items-center gap-4 bg-[#EE1D23] text-white px-8 py-4 rounded-full font-[family-name:var(--font-outfit)] transition-all hover:bg-[#d4191f] hover:shadow-lg hover:shadow-[#EE1D23]/20"
-                            >
-                                <span className="text-sm font-bold uppercase tracking-widest">Solicitar Evaluación Técnica</span>
-                                <div className="p-2 bg-white/20 rounded-full group-hover:translate-x-1 transition-transform">
-                                    <ArrowRight size={16} />
-                                </div>
-                            </motion.button>
-                        </motion.div>
+            <a
+              href="#galeria"
+              className="inline-flex items-center gap-4 bg-[#EE1D23] text-white px-10 py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.3em] hover:bg-white hover:text-[#0F172A] transition-all"
+            >
+              Explorar Portafolio
+              <ArrowRight size={18} />
+            </a>
+          </motion.div>
+        </div>
+
+        <div className="w-full lg:w-[45%] relative h-[50vh] lg:h-auto overflow-hidden">
+          <div
+            className="absolute inset-0 bg-cover bg-center grayscale-[0.2] hover:grayscale-0 transition-all duration-[3000ms]"
+            style={{ backgroundImage: `url('/images/restauracion/hero-restauracion.webp')` }}
+          />
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#111111] to-transparent hidden lg:block" />
+          
+          <div className="absolute bottom-10 right-10 z-20 hidden lg:block">
+             <div className="p-8 border border-white/10 backdrop-blur-xl bg-white/5 rounded-full aspect-square flex flex-center text-center items-center justify-center">
+                <p className="text-[9px] font-bold uppercase tracking-[0.5em] text-white leading-tight">Rigor<br/>Absoluto</p>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      <RestorationSpecialties />
+      <RestorationProcess />
+
+      {/* ── GALERÍA DRAGGABLE ── */}
+      <section id="galeria" className="min-h-screen bg-[#0F172A] py-24 flex flex-col justify-center overflow-hidden">
+        <div className="container mx-auto px-6 lg:px-20 mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <h2 className="text-4xl lg:text-6xl font-normal text-white font-[family-name:var(--font-cinzel)]">
+              Maestría en <span className="text-white/30 italic">Intervención.</span>
+            </h2>
+
+            <div className="flex gap-2 p-1 bg-white/5 rounded-2xl border border-white/10">
+              <button
+                onClick={() => setActiveTab("comparativa")}
+                className={`px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all ${
+                  activeTab === "comparativa" ? "bg-[#EE1D23] text-white" : "text-white/40 hover:text-white"
+                }`}
+              >
+                Comparativa
+              </button>
+              <button
+                onClick={() => setActiveTab("proceso")}
+                className={`px-6 py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all ${
+                  activeTab === "proceso" ? "bg-[#EE1D23] text-white" : "text-white/40 hover:text-white"
+                }`}
+              >
+                Proceso
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <motion.div ref={carousel} className="cursor-grab active:cursor-grabbing">
+          <motion.div
+            drag="x"
+            dragConstraints={{ right: 0, left: -width }}
+            className="flex gap-8 px-6 lg:px-[10vw]"
+          >
+            <AnimatePresence mode="wait">
+              {activeTab === "comparativa" ? (
+                antesDesques.map((item) => (
+                  <AntesDesquesCard key={item.id} item={item} />
+                ))
+              ) : (
+                procesoImages.map((img, idx) => (
+                  <div
+                    key={idx}
+                    className="relative flex-shrink-0 w-[85vw] md:w-[450px] lg:w-[500px] aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-[#111] shadow-2xl select-none"
+                  >
+                    <img src={img.src} alt={img.caption} className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+                    <div className="absolute bottom-10 left-10 right-10">
+                      <span className="text-[10px] font-bold text-[#EE1D23] uppercase tracking-[0.4em] mb-2 block">Etapa 0{idx + 1}</span>
+                      <p className="text-xl text-white font-light font-[family-name:var(--font-cinzel)]">{img.caption}</p>
                     </div>
-                </div>
+                  </div>
+                ))
+              )}
+            </AnimatePresence>
+          </motion.div>
+        </motion.div>
 
-                {/* Indicador de Scroll Visual */}
-                <motion.div
-                    animate={{ opacity: [0.2, 0.6, 0.2], y: [0, 5, 0] }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
-                >
-                    <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/40">Descubrir Proceso</span>
-                    <div className="w-[1px] h-12 bg-gradient-to-b from-white/40 to-transparent" />
-                </motion.div>
-            </section>
+        <div className="mt-12 flex justify-center gap-4 text-white/10">
+           <ChevronLeft size={20} />
+           <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Deslizar para explorar</span>
+           <ChevronRight size={20} />
+        </div>
+      </section>
 
-            {/* Sección 2: Especialidades Técnicas (El "Cómo lo hacemos") */}
-            <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
-                <div className="container mx-auto px-6 lg:px-12">
-                    {/* Encabezado Principal */}
-                    <div className="text-center max-w-3xl mx-auto mb-20 lg:mb-28">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-6 block">Nuestro Enfoque</span>
-                        <h2 className="text-3xl md:text-5xl font-normal text-[#0F172A] mb-8 font-[family-name:var(--font-cinzel)] leading-tight">
-                            Áreas de Especialización
-                        </h2>
-                        <p className="text-lg font-light text-[#0F172A]/60 font-[family-name:var(--font-outfit)] leading-relaxed">
-                            Intervenimos el patrimonio material con una metodología científica. Desde el plano bidimensional del lienzo hasta el volumen monumental de la escultura urbana, dominando tanto técnicas milenarias como materiales del siglo XXI.
-                        </p>
-                    </div>
+      <div id="cotizar">
+        <RestorationGalleryCTA />
+      </div>
 
-                    {/* Split Grid: Pictórico vs Escultórico */}
-                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-
-                        {/* Columna Izquierda: Restauración Pictórica */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
-                            className="group relative bg-[#FDFDFD] border border-gray-100 p-10 lg:p-14 rounded-[2rem] overflow-hidden"
-                        >
-                            {/* Hover Subtle Background Texture */}
-                            <div className="absolute inset-0 bg-[url('/images/restauracion/pictorica-bg.webp')] bg-cover bg-center opacity-0 group-hover:opacity-5 transition-opacity duration-700 pointer-events-none" />
-
-                            <div className="relative z-10">
-                                <Paintbrush size={40} strokeWidth={1.5} className="text-[#EE1D23] mb-8" />
-                                <h3 className="text-3xl font-normal text-[#0F172A] mb-4 font-[family-name:var(--font-cinzel)]">
-                                    Artes Pictóricas y Lienzos
-                                </h3>
-                                {/* Línea decorativa */}
-                                <div className="w-12 h-[1px] bg-[#EE1D23]/50 mb-8" />
-
-                                <p className="text-base font-light text-[#0F172A]/70 leading-relaxed mb-10 font-[family-name:var(--font-outfit)]">
-                                    Especialistas en la recuperación de obras de carácter religioso y civil. Intervenimos con precisión científica para devolver la vibrancia y estabilidad a la pintura mural, caballete y retablística.
-                                </p>
-
-                                <div className="space-y-4">
-                                    <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0F172A]/50 mb-6">Soportes & Materiales</h4>
-                                    <ul className="space-y-4 font-[family-name:var(--font-outfit)]">
-                                        {[
-                                            { name: "Óleos sobre lienzo y tabla", icon: Droplet },
-                                            { name: "Pintura sobre retablos coloniales", icon: Frame },
-                                            { name: "Recuperación de policromías en maderas antiguas", icon: TreePine },
-                                            { name: "Restauración de marcos dorados al pan de oro", icon: Sparkles }
-                                        ].map((item, i) => (
-                                            <li key={i} className="flex items-center gap-4 text-[#0F172A]/80 font-light">
-                                                <div className="p-1.5 rounded-full bg-gray-50 border border-gray-100 flex-shrink-0">
-                                                    <item.icon size={14} className="text-[#EE1D23]" />
-                                                </div>
-                                                {item.name}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        </motion.div>
-
-                        {/* Columna Derecha: Restauración Escultórica */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                            className="group relative bg-[#0F172A] text-white p-10 lg:p-14 rounded-[2rem] overflow-hidden"
-                        >
-                            {/* Hover Subtle Background Texture */}
-                            <div className="absolute inset-0 bg-[url('/images/restauracion/escultorica-bg.webp')] bg-cover bg-center opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none grayscale" />
-
-                            <div className="relative z-10">
-                                <Cog size={40} strokeWidth={1.5} className="text-[#EE1D23] mb-8" />
-                                <h3 className="text-3xl font-normal mb-4 font-[family-name:var(--font-cinzel)] text-white">
-                                    Escultura y Arte Volumétrico
-                                </h3>
-                                {/* Línea decorativa */}
-                                <div className="w-12 h-[1px] bg-[#EE1D23]/50 mb-8" />
-
-                                <p className="text-base font-light text-white/70 leading-relaxed mb-10 font-[family-name:var(--font-outfit)]">
-                                    Restauración integral de figuras religiosas de culto y monumentos públicos. Trabajamos con una amplia gama de materiales modernos y tradicionales para asegurar la conservación y la máxima durabilidad estructural frente al intemperismo.
-                                </p>
-
-                                <div className="space-y-4">
-                                    <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mb-6">Soportes & Materiales</h4>
-                                    <ul className="space-y-4 font-[family-name:var(--font-outfit)]">
-                                        {[
-                                            { name: "Modelado y restitución en Resinas Epóxicas", icon: Droplet },
-                                            { name: "Consolidación de Maderas talladas y apolilladas", icon: TreePine },
-                                            { name: "Creación de estructuras en Fibra de Vidrio", icon: Cog },
-                                            { name: "Intervención en Cemento, Yeso escultórico y Metal", icon: Hammer }
-                                        ].map((item, i) => (
-                                            <li key={i} className="flex items-center gap-4 text-white/80 font-light">
-                                                <div className="p-1.5 rounded-full bg-white/5 border border-white/10 flex-shrink-0">
-                                                    <item.icon size={14} className="text-[#EE1D23]" />
-                                                </div>
-                                                {item.name}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        </motion.div>
-
-                    </div>
-                </div>
-            </section>
-
-            {/* Sección 3: Proceso de Intervención */}
-            <RestorationProcess />
-
-            {/* Sección 4: Casos de Éxito y CTA */}
-            <RestorationGalleryCTA />
-
-            <Footer />
-        </main>
-    );
+      <Footer />
+    </main>
+  );
 }

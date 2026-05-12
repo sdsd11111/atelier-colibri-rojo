@@ -18,7 +18,7 @@ const services = [
         subtitle: "15 años de Trayectoria",
         route: "/arte-monumental",
         routeLabel: "arte-monumental",
-        description: "Esculturas de gran formato, murales urbanos y obras de impacto permanente en espacios públicos. Diseñamos y ejecutamos el arte que da identidad a una ciudad.",
+        description: "Esculturas y murales de gran formato que transforman el entorno urbano con identidad y permanencia.",
         tech: "Resina, fibra de vidrio, cemento y metal.",
         icon: <Landmark className="w-5 h-5" />,
         image: "/images/home/servicio-muralismo.webp",
@@ -28,50 +28,30 @@ const services = [
         subtitle: "30 años de Legado",
         route: "/restauracion-de-obra",
         routeLabel: "restauracion-de-obra",
-        description: "Devolvemos la vida a bienes pictóricos y escultóricos: arte religioso, óleos sobre lienzo, retablos y maderas antiguas con técnicas de conservación internacionales.",
-        tech: "Intervención en resina, madera, fibra de vidrio y materiales tradicionales.",
+        description: "Conservación de bienes culturales y arte sacro con rigor científico y excelencia técnica.",
+        tech: "Procesos químicos y técnicos bajo estándares internacionales.",
         icon: <History className="w-5 h-5" />,
-        image: "/images/home/servicio-escultura.webp",
-    },
-    {
-        title: "Academia de Artes Plásticas",
-        subtitle: "$50 todo incluido",
-        route: "/academia",
-        routeLabel: "academia",
-        description: "Cursos de dibujo, pintura al óleo, acuarela y escultura para niños, jóvenes y adultos. Grupos reducidos, maestros con 30 años de experiencia y materiales incluidos.",
-        tech: "Diferenciador: Incluye todos los materiales de trabajo.",
-        icon: <Palette className="w-5 h-5" />,
         image: "/images/home/servicio-restauracion.webp",
     },
     {
-        title: "Producción Audiovisual",
-        subtitle: "10 años de Innovación",
-        route: "/produccion-audiovisual",
-        routeLabel: "produccion-audiovisual",
-        description: "Videos comerciales, spot publicitarios, cobertura de eventos y post-producción con colorización profesional. La visión de un artista plástico aplicada al cine.",
-        tech: "Producción 4K, colorización y edición profesional.",
-        icon: <Video className="w-5 h-5" />,
-        image: "/images/home/servicio-academia.webp",
+        title: "Artes Plásticas",
+        subtitle: "Obras de Propuesta",
+        route: "/artes-plasticas",
+        routeLabel: "artes-plasticas",
+        description: "Obras originales de autor en óleo y técnicas mixtas para colecciones privadas exclusivas.",
+        tech: "Óleo sobre lienzo, Acuarela, Acrílico y Técnicas Mixtas.",
+        icon: <Palette className="w-5 h-5" />,
+        image: "/images/home/servicio-galeria.webp",
     },
     {
-        title: "Aerografía y Diseño",
-        subtitle: "Personalización Única",
-        route: "/#contacto",
-        routeLabel: "consultar",
-        description: "Intervenciones artísticas únicas sobre cascos, vehículos, textiles y superficies diversas. Cada pieza es una obra original con previsualización digital incluida.",
-        tech: "Previsualización digital y ejecución técnica premium.",
+        title: "Ambientación y Diseño",
+        subtitle: "Soluciones Integrales",
+        route: "/varios",
+        routeLabel: "ambientacion-renders",
+        description: "Diseño de espacios y mobiliario artístico mediante previsualización 3D avanzada.",
+        tech: "Renders de alta fidelidad, Diseño 3D y Mobiliario de Autor.",
         icon: <Zap className="w-5 h-5" />,
         image: "/images/home/servicio-audiovisual.webp",
-    },
-    {
-        title: "Galería de Arte",
-        subtitle: "Proyección Internacional",
-        route: "/galeria",
-        routeLabel: "galeria",
-        description: "Nuestra galería permanente exhibe lo mejor del Atelier: restauraciones, esculturas, murales y producción audiovisual en un solo espacio de contemplación.",
-        tech: "Ubicación estratégica y curaduría profesional.",
-        icon: <ImageIcon className="w-5 h-5" />,
-        image: "/images/home/servicio-galeria.webp",
     }
 ];
 
@@ -139,7 +119,7 @@ const ServicesSection = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-y-12 gap-x-8"
                 >
                     {services.map((service, index) => (
                         <motion.a
@@ -149,16 +129,20 @@ const ServicesSection = () => {
                             className="group relative flex flex-col h-full bg-[#fdfdfd] border border-gray-100 rounded-2xl p-8 lg:p-10 transition-all duration-500 hover:border-[#EE1D23]/30 hover:shadow-[0_20px_60px_-15px_rgba(238,29,35,0.08)] overflow-hidden cursor-pointer"
                             aria-label={`Ver página de ${service.title}`}
                         >
-                            {/* Background Ghost Image (Editorial Style) */}
+                            {/* Background Image with Enhanced Visibility */}
                             {service.image && (
-                                <div
-                                    className="absolute inset-0 opacity-[0.12] grayscale transition-all duration-700 group-hover:opacity-[0.40] group-hover:grayscale-0 group-hover:scale-110 pointer-events-none"
-                                    style={{
-                                        backgroundImage: `url('${service.image}')`,
-                                        backgroundSize: 'cover',
-                                        backgroundPosition: 'center'
-                                    }}
-                                />
+                                <>
+                                    <div
+                                        className="absolute inset-0 opacity-[0.35] transition-all duration-1000 group-hover:opacity-[0.8] group-hover:scale-110 pointer-events-none"
+                                        style={{
+                                            backgroundImage: `url('${service.image}')`,
+                                            backgroundSize: 'cover',
+                                            backgroundPosition: 'center'
+                                        }}
+                                    />
+                                    {/* Gradient Overlay for Text Readability */}
+                                    <div className="absolute inset-0 bg-gradient-to-br from-white via-white/95 to-transparent group-hover:via-white/60 transition-all duration-700 pointer-events-none" />
+                                </>
                             )}
 
                             {/* Route Pill */}

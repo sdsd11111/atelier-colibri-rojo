@@ -12,10 +12,10 @@ import { Quote, Plus, Minus, ChevronRight } from "lucide-react";
 
 const testimonials = [
     {
-        category: "Academia",
-        text: "Increíble que por $50 incluyan todos los materiales. Mis hijos han aprendido técnicas reales de pintura en un ambiente muy profesional.",
+        category: "Artes Plásticas",
+        text: "Encargamos un cuadro al óleo del retrato familiar y superó todas nuestras expectativas. El detalle, la técnica y la entrega a tiempo fueron impecables.",
         author: "Familia Loja-Samaniego",
-        role: "Padres de Estudiantes"
+        role: "Clientes — Cuadro por Encargo"
     },
     {
         category: "Restauración",
@@ -33,8 +33,8 @@ const testimonials = [
 
 const faqs = [
     {
-        question: "¿Qué incluye el pago de $50 en la academia?",
-        answer: "Incluye la instrucción profesional y todos los materiales de trabajo: óleos, pinceles, arcilla, lienzos y solventes. No necesitas traer nada adicional."
+        question: "¿Hacen cuadros y pinturas por encargo?",
+        answer: "Sí, realizamos cuadros al óleo, retratos, acuarelas y esculturas decorativas completamente personalizadas. Contáctenos con una referencia visual y le enviamos una propuesta en 24 horas."
     },
     {
         question: "¿Hacen trabajos de restauración fuera de Loja?",

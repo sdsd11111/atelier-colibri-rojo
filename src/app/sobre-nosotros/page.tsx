@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Palette, ShieldCheck, Camera, Sparkles } from "lucide-react";
+import { Palette, ShieldCheck, Brush, Sparkles } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -168,7 +168,7 @@ export default function NosotrosPage() {
                             </div>
                         </motion.div>
 
-                        {/* Tarjeta 3: Audiovisual */}
+                        {/* Tarjeta 3: Artes Plásticas */}
                         <motion.div
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -179,20 +179,20 @@ export default function NosotrosPage() {
                             <div className="h-48 w-full relative overflow-hidden">
                                 <div
                                     className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                                    style={{ backgroundImage: `url('/images/nosotros/equipo-audiovisual.webp')` }}
+                                    style={{ backgroundImage: `url('/images/nosotros/equipo-plasticas.webp')` }}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/90" />
                                 <div className="absolute bottom-4 right-4 p-3 bg-white/90 backdrop-blur-md rounded-full shadow-sm text-[#EE1D23]">
-                                    <Camera size={24} />
+                                    <Brush size={24} />
                                 </div>
                             </div>
                             <div className="p-8 lg:p-10 flex-1 flex flex-col">
                                 <div className="mb-6 pl-4 border-l-2 border-[#EE1D23]">
-                                    <h3 className="text-2xl font-normal text-[#0F172A] font-[family-name:var(--font-cinzel)] leading-tight">Audiovisual</h3>
-                                    <span className="text-sm font-bold tracking-widest text-[#EE1D23] uppercase mt-2 block">10 Años</span>
+                                    <h3 className="text-2xl font-normal text-[#0F172A] font-[family-name:var(--font-cinzel)] leading-tight">Artes Plásticas</h3>
+                                    <span className="text-sm font-bold tracking-widest text-[#EE1D23] uppercase mt-2 block">20 Años</span>
                                 </div>
                                 <p className="text-base font-light text-[#0F172A]/70 leading-relaxed font-[family-name:var(--font-outfit)]">
-                                    El departamento dirigido por Carlitos. A la vanguardia de la innovación digital mediante animación, diseño profesional y producción audiovisual que moderniza y difunde la propuesta del Atelier al mundo.
+                                    Obras de propuesta original que trascienden el tiempo. Aplicamos 20 años de dominio técnico en óleo, acuarela y escultura para crear piezas que dialogan con el coleccionismo contemporáneo.
                                 </p>
                             </div>
                         </motion.div>
@@ -234,7 +234,7 @@ export default function NosotrosPage() {
                             <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-6 block">Hacia el futuro</span>
                             <h3 className="text-3xl font-normal text-[#0F172A] mb-6 font-[family-name:var(--font-cinzel)]">Visión</h3>
                             <p className="text-lg font-light text-[#0F172A]/70 leading-relaxed font-[family-name:var(--font-outfit)]">
-                                Consolidarnos definitivamente como el <strong>nodo cultural referente de Loja</strong>, siendo el punto de convergencia donde la tradición técnica inquebrantable se une armónicamente con las nuevas tecnologías de diseño y producción audiovisual.
+                                Consolidarnos definitivamente como el <strong>nodo cultural referente de Loja</strong>, siendo el punto de convergencia donde la tradición técnica inquebrantable se une armónicamente con la creación artística de vanguardia y la excelencia plástica.
                             </p>
                         </motion.div>
                     </div>

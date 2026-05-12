@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Sparkles, ArrowRight, Instagram, Facebook } from "lucide-react";
+import { X, ArrowRight, Instagram, Facebook, Sparkles } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -15,13 +15,12 @@ function cn(...inputs: ClassValue[]) {
 const SERVICES = [
     { name: "Restauración de Obra", href: "/restauracion-de-obra" },
     { name: "Arte Público y Monumental", href: "/arte-monumental" },
-    { name: "Producción Audiovisual", href: "/produccion-audiovisual" },
+    { name: "Artes Plásticas", href: "/artes-plasticas" },
 ];
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isServicesOpen, setIsServicesOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -125,7 +124,6 @@ const Navbar = () => {
                 </div>
             </motion.nav>
 
-            {/* Backdrop: Managed by separate AnimatePresence */}
             <AnimatePresence>
                 {isMenuOpen && (
                     <motion.div
@@ -139,7 +137,6 @@ const Navbar = () => {
                 )}
             </AnimatePresence>
 
-            {/* Sidebar Panel: Managed by separate AnimatePresence */}
             <AnimatePresence>
                 {isMenuOpen && (
                     <motion.aside
@@ -163,85 +160,60 @@ const Navbar = () => {
 
                         {/* Menu Links Content */}
                         <div className="flex-1 overflow-y-auto px-8 lg:px-12 py-6">
-                            <nav className="flex flex-col gap-8 lg:gap-12">
-                                <motion.a
-                                    custom={0} variants={itemVariants}
-                                    href="/sobre-nosotros"
-                                    onClick={() => setIsMenuOpen(false)}
-                                    className="text-3xl lg:text-5xl font-normal text-[#0F172A] hover:text-[#EE1D23] transition-colors font-[family-name:var(--font-cinzel)] group flex items-center gap-4"
-                                >
-                                    <span className="text-xs text-gray-400 mt-2 font-[family-name:var(--font-outfit)]">01</span>
-                                    Nosotros
-                                    <ArrowRight className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-[#EE1D23]" size={24} />
-                                </motion.a>
+                            <nav className="flex flex-col gap-10">
+                                
+                                {/* Services - Always Visible */}
+                                <div className="flex flex-col gap-6">
+                                    <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-300 block mb-2">Servicios</span>
+                                    {SERVICES.map((service, idx) => (
+                                        <motion.a
+                                            key={idx}
+                                            custom={idx}
+                                            variants={itemVariants}
+                                            href={service.href}
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className="text-2xl lg:text-4xl font-normal text-[#0F172A] hover:text-[#EE1D23] transition-colors font-[family-name:var(--font-cinzel)] group flex items-center gap-4"
+                                        >
+                                            <span className="text-[10px] text-gray-300 font-[family-name:var(--font-outfit)]">0{idx + 1}</span>
+                                            {service.name}
+                                            <ArrowRight className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-[#EE1D23]" size={20} />
+                                        </motion.a>
+                                    ))}
+                                </div>
 
-                                {/* Nested Services Expansion */}
-                                <motion.div custom={1} variants={itemVariants} className="flex flex-col">
-                                    <button
-                                        onClick={() => setIsServicesOpen(!isServicesOpen)}
-                                        className="text-3xl lg:text-5xl font-normal text-[#0F172A] hover:text-[#EE1D23] transition-colors font-[family-name:var(--font-cinzel)] flex items-center justify-between group"
-                                    >
-                                        <div className="flex items-center gap-4">
-                                            <span className="text-xs text-gray-400 mt-2 font-[family-name:var(--font-outfit)]">02</span>
-                                            Servicios
-                                        </div>
-                                        <ChevronDown size={30} className={cn("transition-transform duration-500 text-gray-200", isServicesOpen && "rotate-180 text-[#EE1D23]")} />
-                                    </button>
-
-                                    <AnimatePresence>
-                                        {isServicesOpen && (
-                                            <motion.div
-                                                key="services-submenu"
-                                                initial={{ height: 0, opacity: 0 }}
-                                                animate={{ height: "auto", opacity: 1 }}
-                                                exit={{ height: 0, opacity: 0 }}
-                                                className="overflow-hidden bg-gray-50/50 rounded-2xl mt-4"
-                                            >
-                                                <div className="flex flex-col py-4 px-8 gap-4">
-                                                    {SERVICES.map((service, idx) => (
-                                                        <a
-                                                            key={idx}
-                                                            href={service.href}
-                                                            onClick={() => setIsMenuOpen(false)}
-                                                            className="text-base font-light text-[#0F172A]/60 hover:text-[#EE1D23] transition-colors"
-                                                        >
-                                                            {service.name}
-                                                        </a>
-                                                    ))}
-                                                </div>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </motion.div>
+                                <div className="h-px bg-gray-50 my-2" />
 
                                 <motion.a
-                                    custom={2} variants={itemVariants}
-                                    href="/academia"
+                                    custom={4} variants={itemVariants}
+                                    href="/varios"
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="text-3xl lg:text-5xl font-normal text-[#0F172A] hover:text-[#EE1D23] transition-colors font-[family-name:var(--font-cinzel)] group flex items-center gap-4"
+                                    className="text-2xl lg:text-4xl font-normal text-[#0F172A] hover:text-[#EE1D23] transition-colors font-[family-name:var(--font-cinzel)] group flex items-center gap-4"
                                 >
-                                    <span className="text-xs text-gray-400 mt-2 font-[family-name:var(--font-outfit)]">03</span>
-                                    Academia
-                                    <ArrowRight className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-[#EE1D23]" size={24} />
+                                    <span className="text-[10px] text-gray-300 font-[family-name:var(--font-outfit)]">04</span>
+                                    Varios
+                                    <ArrowRight className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-[#EE1D23]" size={20} />
                                 </motion.a>
 
                                 <motion.a
-                                    custom={3} variants={itemVariants}
-                                    href="/galeria"
+                                    custom={5} variants={itemVariants}
+                                    href="/blog"
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="text-3xl lg:text-5xl font-normal text-[#0F172A] hover:text-[#EE1D23] transition-colors font-[family-name:var(--font-cinzel)] group flex items-center gap-4"
+                                    className="text-2xl lg:text-4xl font-normal text-[#0F172A] hover:text-[#EE1D23] transition-colors font-[family-name:var(--font-cinzel)] group flex items-center gap-4"
                                 >
-                                    <span className="text-xs text-gray-400 mt-2 font-[family-name:var(--font-outfit)]">04</span>
-                                    Galería
-                                    <ArrowRight className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-[#EE1D23]" size={24} />
+                                    <span className="text-[10px] text-gray-300 font-[family-name:var(--font-outfit)]">05</span>
+                                    Blog
+                                    <ArrowRight className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-[#EE1D23]" size={20} />
                                 </motion.a>
                             </nav>
                         </div>
 
                         {/* Footer Sidebar: CTA + Socials */}
                         <div className="p-8 lg:p-12 border-t border-gray-50 bg-gray-50/30">
-                            <motion.button
-                                custom={4} variants={itemVariants}
+                            <motion.a
+                                href="https://wa.me/593992183133?text=Hola,%20me%20gustaría%20cotizar%20un%20proyecto%20con%20el%20Atelier%20Colibrí%20Rojo."
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                custom={6} variants={itemVariants}
                                 animate={{
                                     scale: [1, 1.02, 1],
                                     boxShadow: [
@@ -259,13 +231,13 @@ const Navbar = () => {
                                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-100%]"
                                 />
                                 <Sparkles size={16} className="text-white/80" />
-                                Inscribirse - $50
-                            </motion.button>
+                                Cotizar Proyecto
+                            </motion.a>
 
                             <div className="flex items-center justify-between">
                                 <div className="flex gap-6">
-                                    <a href="#" className="text-gray-400 hover:text-[#EE1D23] transition-colors"><Instagram size={20} strokeWidth={1.5} /></a>
-                                    <a href="#" className="text-gray-400 hover:text-[#EE1D23] transition-colors"><Facebook size={20} strokeWidth={1.5} /></a>
+                                    <a href="https://www.instagram.com/ateliercolibrirojo/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#EE1D23] transition-colors"><Instagram size={20} strokeWidth={1.5} /></a>
+                                    <a href="https://www.facebook.com/atelier.colibrirojo/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#EE1D23] transition-colors"><Facebook size={20} strokeWidth={1.5} /></a>
                                 </div>
                                 <span className="text-[9px] font-bold text-gray-300 uppercase tracking-widest">Loja, Ecuador</span>
                             </div>

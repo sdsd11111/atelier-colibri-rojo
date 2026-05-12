@@ -2,258 +2,255 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Send, Building2, MapPin, Trophy } from "lucide-react";
+import { MapPin, Send, Building2 } from "lucide-react";
 
-const galleryProjects = [
+// Casos de Éxito — portfolio real
+const casos = [
     {
-        id: "p1",
-        title: "Monumento a la Identidad",
-        location: "Plaza Central - Loja",
+        id: "c1",
+        title: "Monumento a la Identidad Lojana",
+        tipo: "Escultura Monumental",
+        cliente: "GAD Municipal de Loja",
+        location: "Plaza Central, Loja",
         image: "/images/monumental/proyecto-1.webp",
-        size: "large" // Takes more vertical space
+        span: "row-span-2"
     },
     {
-        id: "p2",
+        id: "c2",
         title: "Mural Raíces del Sur",
-        location: "Fachada Institucional",
+        tipo: "Mural Artístico",
+        cliente: "Institución Educativa",
+        location: "Fachada Norte, Loja",
         image: "/images/monumental/proyecto-2.webp",
-        size: "normal"
+        span: ""
     },
     {
-        id: "p3",
+        id: "c3",
         title: "Escultura Botánica",
+        tipo: "Escultura — Fibra de Vidrio",
+        cliente: "Municipio de Loja",
         location: "Parque Lineal Pucará",
         image: "/images/monumental/proyecto-3.webp",
-        size: "normal"
+        span: ""
     },
     {
-        id: "p4",
-        title: "Mural Épico Batalla de Loja",
-        location: "Av. Cuxibamba",
+        id: "c4",
+        title: "Mural Épico — Batalla de Loja",
+        tipo: "Mural Artístico Gran Formato",
+        cliente: "Entidad Pública",
+        location: "Av. Cuxibamba, Loja",
         image: "/images/monumental/proyecto-4.webp",
-        size: "wide" // Takes full width on mobile, 2 cols on desktop
+        span: "col-span-2"
     }
 ];
 
 export default function MonumentalGalleryCTA() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setTimeout(() => setIsSubmitting(false), 2000); // Simulando envío
-    };
-
     return (
         <section className="bg-white">
-            {/* Bloque 1: Galería de Hitos (Grid Asimétrico) */}
-            <div className="py-24 lg:py-32">
-                <div className="container mx-auto px-6 lg:px-12">
-                    <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-24">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-6 block">Grid de Impacto</span>
-                        <h2 className="text-3xl md:text-5xl font-normal text-[#0F172A] mb-8 font-[family-name:var(--font-cinzel)] leading-tight">
-                            Obras que definen el Paisaje de Loja
-                        </h2>
-                        <p className="text-lg font-light text-[#0F172A]/70 font-[family-name:var(--font-outfit)]">
-                            Una exposición de nuestro legado en el espacio público. Cada pieza es un hito de ingeniería técnica y narrativa visual.
-                        </p>
+
+            {/* ── Casos de Éxito ── */}
+            <div id="casos" className="pt-24 lg:pt-32 pb-16 lg:pb-20">
+                <div className="container mx-auto px-6 lg:px-16">
+
+                    {/* Header — ultra minimal */}
+                    <div className="flex items-end justify-between mb-12 lg:mb-16">
+                        <div>
+                            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-3 block font-[family-name:var(--font-outfit)]">Portafolio</span>
+                            <h2 className="text-3xl md:text-5xl font-normal text-[#0F172A] font-[family-name:var(--font-cinzel)] leading-tight">
+                                Casos de Éxito
+                            </h2>
+                        </div>
+                        <a
+                            href="/galeria"
+                            className="hidden md:inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#0F172A]/40 hover:text-[#EE1D23] transition-colors font-[family-name:var(--font-outfit)]"
+                        >
+                            Ver Galería Completa →
+                        </a>
                     </div>
 
-                    {/* Masonry-style Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 auto-rows-[300px]">
-                        {galleryProjects.map((project, idx) => {
-                            // Assign specific grid spans based on 'size'
-                            let spanClasses = "";
-                            if (project.size === "large") spanClasses = "md:row-span-2";
-                            if (project.size === "wide") spanClasses = "md:col-span-2 lg:col-span-2";
+                    {/* Masonry Grid — images first */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[280px]">
+                        {casos.map((caso, idx) => (
+                            <motion.div
+                                key={caso.id}
+                                initial={{ opacity: 0, y: 24 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-60px" }}
+                                transition={{ delay: idx * 0.1, duration: 0.7, ease: "easeOut" }}
+                                className={`relative rounded-3xl overflow-hidden group cursor-pointer ${caso.span}`}
+                            >
+                                {/* Image */}
+                                <div
+                                    className="absolute inset-0 bg-cover bg-center transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
+                                    style={{ backgroundImage: `url('${caso.image}')` }}
+                                />
 
-                            return (
-                                <motion.div
-                                    key={project.id}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true, margin: "-50px" }}
-                                    transition={{ delay: idx * 0.15, duration: 0.8, ease: "easeOut" }}
-                                    className={`relative rounded-3xl overflow-hidden group shadow-xl shadow-gray-200/50 cursor-pointer ${spanClasses}`}
-                                >
-                                    <div
-                                        className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-out group-hover:scale-105"
-                                        style={{ backgroundImage: `url('${project.image}')` }}
-                                    />
+                                {/* Always-visible subtle gradient at bottom */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent opacity-60" />
 
-                                    {/* Gradient Hover Overlay */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                {/* Tipo badge — top left */}
+                                <div className="absolute top-4 left-4 px-3 py-1.5 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
+                                    <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white">{caso.tipo}</span>
+                                </div>
 
-                                    {/* Project Info (Appears on Hover) */}
-                                    <div className="absolute inset-x-0 bottom-0 p-8 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out flex flex-col items-start">
-                                        <h3 className="text-2xl text-white font-normal font-[family-name:var(--font-cinzel)] leading-tight mb-2">
-                                            {project.title}
-                                        </h3>
-                                        <div className="flex items-center gap-2 text-white/80 font-[family-name:var(--font-outfit)] text-sm">
-                                            <MapPin size={14} />
-                                            <span className="font-light">{project.location}</span>
-                                        </div>
+                                {/* Info — bottom, appears on hover */}
+                                <div className="absolute inset-x-0 bottom-0 p-6 translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#EE1D23] mb-1 font-[family-name:var(--font-outfit)]">{caso.cliente}</p>
+                                    <h3 className="text-xl text-white font-normal font-[family-name:var(--font-cinzel)] leading-tight mb-2">
+                                        {caso.title}
+                                    </h3>
+                                    <div className="flex items-center gap-1.5 text-white/60 font-[family-name:var(--font-outfit)]">
+                                        <MapPin size={12} />
+                                        <span className="text-xs font-light">{caso.location}</span>
                                     </div>
-                                </motion.div>
-                            );
-                        })}
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
             </div>
 
-            {/* Bloque 2: Banner de Autoridad (El Legado) */}
-            <div className="bg-[#EE1D23] py-20 lg:py-24 relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay" />
-                <div className="absolute top-0 w-full h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-                <div className="absolute bottom-0 w-full h-px bg-gradient-to-r from-transparent via-[#0F172A]/20 to-transparent" />
-
-                <div className="container mx-auto px-6 lg:px-12 relative z-10 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="max-w-4xl mx-auto flex flex-col items-center"
-                    >
-                        <Trophy size={48} className="text-white/90 mb-8" strokeWidth={1} />
-                        <h3 className="text-3xl md:text-5xl lg:text-6xl font-normal text-white font-[family-name:var(--font-cinzel)] leading-tight mb-8">
-                            15 años creando referentes visuales en el sur del Ecuador.
-                        </h3>
-                        <p className="text-white/80 text-lg md:text-xl font-light font-[family-name:var(--font-outfit)] tracking-wide">
-                            Calidad técnica garantizada en cada formato. De lo monumental a lo eterno.
-                        </p>
-                    </motion.div>
+            {/* ── Stats Band ── */}
+            <div className="border-y border-gray-100 py-12">
+                <div className="container mx-auto px-6 lg:px-16">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center font-[family-name:var(--font-outfit)]">
+                        {[
+                            { val: "15+", label: "Años de trayectoria" },
+                            { val: "60+", label: "Obras ejecutadas" },
+                            { val: "12", label: "Cantones de Loja" },
+                            { val: "100%", label: "Ciclo completo" }
+                        ].map((stat, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 16 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1, duration: 0.6 }}
+                            >
+                                <p className="text-4xl lg:text-5xl font-normal text-[#0F172A] font-[family-name:var(--font-cinzel)] mb-2">{stat.val}</p>
+                                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#0F172A]/40">{stat.label}</p>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </div>
 
-            {/* Bloque 3: Formulario de Proyectos Especiales (CTA Institucional) */}
-            <div id="cotizar" className="py-24 lg:py-32 bg-[#F8FAFC]">
-                <div className="container mx-auto px-6 lg:px-12 max-w-5xl">
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="bg-white rounded-[2rem] shadow-2xl shadow-gray-200/50 overflow-hidden border border-gray-100 flex flex-col lg:flex-row"
-                    >
-                        {/* Info Panel Lateral */}
-                        <div className="bg-[#0F172A] p-12 lg:w-2/5 flex flex-col justify-between relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-[#EE1D23]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            {/* ── CTA Institucional ── */}
+            <div id="cotizar" className="py-24 lg:py-32 bg-[#0F172A]">
+                <div className="container mx-auto px-6 lg:px-16 max-w-5xl">
 
-                            <div className="relative z-10">
-                                <span className="text-[#EE1D23] text-xs font-bold tracking-[0.3em] uppercase mb-4 block">Consultoría</span>
-                                <h3 className="text-3xl text-white font-normal font-[family-name:var(--font-cinzel)] leading-tight mb-6">
-                                    Inicie su Proyecto Monumental
-                                </h3>
-                                <p className="text-white/70 font-light font-[family-name:var(--font-outfit)] leading-relaxed mb-10">
-                                    Desde intervenciones urbanas hasta esculturas corporativas. Cuéntenos su idea, defina la escala y nosotros nos encargamos de dimensionarla y hacerla realidad.
-                                </p>
-                            </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
-                            <div className="relative z-10 space-y-6">
-                                <div className="flex items-center gap-4 text-white/80">
-                                    <div className="w-10 h-10 rounded-full bg-white/5 mx-auto lg:mx-0 flex items-center justify-center border border-white/10">
-                                        <Building2 size={18} className="text-[#EE1D23]" />
-                                    </div>
-                                    <div className="font-[family-name:var(--font-outfit)] text-sm font-light text-left">
-                                        <p className="text-white font-normal">Atención Especializada</p>
-                                        <p>Para alcaldías, corporaciones e instituciones.</p>
-                                    </div>
+                        {/* Left — text only, minimal */}
+                        <div>
+                            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#EE1D23] mb-6 block font-[family-name:var(--font-outfit)]">Consultoría</span>
+                            <h2 className="text-4xl lg:text-5xl font-normal text-white font-[family-name:var(--font-cinzel)] leading-tight mb-8">
+                                Inicie su obra pública o privada
+                            </h2>
+                            <p className="text-base font-normal text-white/70 leading-relaxed mb-12 font-[family-name:var(--font-outfit)]">
+                                Atendemos municipios, corporaciones e instituciones privadas. Cuéntenos la idea y nosotros la dimensionamos, renderizamos y ejecutamos bajo los más altos estándares técnicos.
+                            </p>
+
+                            <div className="flex items-start gap-4">
+                                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 flex-shrink-0 mt-0.5">
+                                    <Building2 size={18} className="text-[#EE1D23]" />
+                                </div>
+                                <div className="font-[family-name:var(--font-outfit)]">
+                                    <p className="text-sm font-normal text-white mb-1">Atención especializada</p>
+                                    <p className="text-xs font-light text-white/40">Para alcaldías, GADs, empresas y más.</p>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Formulario Corporate-Art */}
-                        <div className="p-10 lg:p-12 lg:w-3/5 font-[family-name:var(--font-outfit)]">
-                            <form onSubmit={handleSubmit} className="space-y-6">
-
-                                {/* Fila Institución / Email */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Institución / Empresa *</label>
-                                        <input
-                                            type="text"
-                                            required
-                                            className="w-full bg-gray-50/50 border-b-2 border-gray-100 px-4 py-3 text-[#0F172A] focus:outline-none focus:border-[#EE1D23] focus:bg-white transition-all rounded-t-xl"
-                                            placeholder="Ej. GAD Municipal"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Correo Electrónico *</label>
-                                        <input
-                                            type="email"
-                                            required
-                                            className="w-full bg-gray-50/50 border-b-2 border-gray-100 px-4 py-3 text-[#0F172A] focus:outline-none focus:border-[#EE1D23] focus:bg-white transition-all rounded-t-xl"
-                                            placeholder="correo@institucion.com"
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Fila Tipo / Espacio */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Tipo de Obra *</label>
-                                        <select
-                                            required
-                                            className="w-full bg-gray-50/50 border-b-2 border-gray-100 px-4 py-3 text-[#0F172A] focus:outline-none focus:border-[#EE1D23] focus:bg-white transition-all rounded-t-xl appearance-none"
-                                            defaultValue=""
-                                        >
-                                            <option value="" disabled>Seleccione una opción</option>
-                                            <option value="mural">Muralismo</option>
-                                            <option value="escultura">Escultura</option>
-                                            <option value="monumento">Monumento Integrado</option>
-                                            <option value="otro">Otro</option>
-                                        </select>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Espacio a Intervenir</label>
-                                        <select
-                                            className="w-full bg-gray-50/50 border-b-2 border-gray-100 px-4 py-3 text-[#0F172A] focus:outline-none focus:border-[#EE1D23] focus:bg-white transition-all rounded-t-xl appearance-none"
-                                            defaultValue=""
-                                        >
-                                            <option value="" disabled>Seleccione el entorno</option>
-                                            <option value="publico">Espacio Público (Plaza/Parque)</option>
-                                            <option value="exterior">Exterior de Edificio</option>
-                                            <option value="interior">Interior Corporativo</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                {/* Descripción / Presupuesto */}
-                                <div className="space-y-2">
-                                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Descripción de la Idea y Presupuesto Estimado (Opcional)</label>
-                                    <textarea
-                                        rows={4}
-                                        className="w-full bg-gray-50/50 border-b-2 border-gray-100 px-4 py-3 text-[#0F172A] focus:outline-none focus:border-[#EE1D23] focus:bg-white transition-all rounded-t-xl resize-none"
-                                        placeholder="Cuéntenos la visión del proyecto y sus escalas estimadas..."
+                        {/* Right — form */}
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                setIsSubmitting(true);
+                                setTimeout(() => setIsSubmitting(false), 2000);
+                            }}
+                            className="space-y-5 font-[family-name:var(--font-outfit)]"
+                        >
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div className="space-y-1.5">
+                                    <label className="text-[10px] font-bold uppercase tracking-wider text-white/30">Institución / Empresa *</label>
+                                    <input
+                                        type="text" required
+                                        placeholder="Ej. GAD Municipal de Loja"
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-[#EE1D23]/60 transition-colors"
                                     />
                                 </div>
+                                <div className="space-y-1.5">
+                                    <label className="text-[10px] font-bold uppercase tracking-wider text-white/30">Correo Electrónico *</label>
+                                    <input
+                                        type="email" required
+                                        placeholder="correo@institucion.com"
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-[#EE1D23]/60 transition-colors"
+                                    />
+                                </div>
+                            </div>
 
-                                {/* Submit Button */}
-                                <button
-                                    type="submit"
-                                    disabled={isSubmitting}
-                                    className="w-full relative flex items-center justify-center gap-3 py-5 bg-[#EE1D23] text-white rounded-xl text-sm font-bold uppercase tracking-[0.2em] shadow-lg shadow-[#EE1D23]/30 hover:bg-[#0F172A] hover:shadow-xl hover:shadow-[#0F172A]/20 transition-all duration-300 group disabled:opacity-70 disabled:cursor-not-allowed mt-4"
-                                >
-                                    {isSubmitting ? (
-                                        <div className="flex gap-2">
-                                            <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" />
-                                            <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: "0.15s" }} />
-                                            <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: "0.3s" }} />
-                                        </div>
-                                    ) : (
-                                        <>
-                                            Solicitar Propuesta Técnica
-                                            <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                                        </>
-                                    )}
-                                </button>
-                                <p className="text-center text-[11px] text-gray-400 mt-4">
-                                    Su información será tratada con confidencialidad para fines de la propuesta.
-                                </p>
-                            </form>
-                        </div>
-                    </motion.div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div className="space-y-1.5">
+                                    <label className="text-[10px] font-bold uppercase tracking-wider text-white/30">Tipo de Obra *</label>
+                                    <select
+                                        required defaultValue=""
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-[#EE1D23]/60 transition-colors appearance-none"
+                                    >
+                                        <option value="" disabled className="bg-[#0F172A]">Seleccione</option>
+                                        <option value="mural" className="bg-[#0F172A]">Mural Artístico</option>
+                                        <option value="escultura" className="bg-[#0F172A]">Escultura Monumental</option>
+                                        <option value="monumento" className="bg-[#0F172A]">Monumento Integrado</option>
+                                        <option value="espacios" className="bg-[#0F172A]">Diseño de Espacios / Arte Integrado</option>
+                                        <option value="otro" className="bg-[#0F172A]">Otro</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-1.5">
+                                    <label className="text-[10px] font-bold uppercase tracking-wider text-white/30">Tipo de Cliente</label>
+                                    <select
+                                        defaultValue=""
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-[#EE1D23]/60 transition-colors appearance-none"
+                                    >
+                                        <option value="" disabled className="bg-[#0F172A]">Seleccione</option>
+                                        <option value="publico" className="bg-[#0F172A]">Entidad Pública</option>
+                                        <option value="privado" className="bg-[#0F172A]">Empresa Privada</option>
+                                        <option value="particular" className="bg-[#0F172A]">Particular</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="space-y-1.5">
+                                <label className="text-[10px] font-bold uppercase tracking-wider text-white/30">Descripción del Proyecto</label>
+                                <textarea
+                                    rows={4}
+                                    placeholder="Cuéntenos la idea, espacio y dimensiones estimadas..."
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-[#EE1D23]/60 transition-colors resize-none"
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="w-full flex items-center justify-center gap-3 py-4.5 bg-[#EE1D23] text-white rounded-xl text-xs font-bold uppercase tracking-[0.25em] hover:bg-white hover:text-[#0F172A] transition-all duration-300 disabled:opacity-60 group"
+                            >
+                                {isSubmitting ? (
+                                    <div className="flex gap-1.5">
+                                        {[0, 0.15, 0.3].map((d, i) => (
+                                            <div key={i} className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: `${d}s` }} />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <>
+                                        Solicitar Propuesta Técnica
+                                        <Send size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                    </>
+                                )}
+                            </button>
+                            <p className="text-center text-[10px] text-white/20 font-[family-name:var(--font-outfit)]">Información tratada con total confidencialidad.</p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>

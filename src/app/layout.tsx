@@ -20,20 +20,21 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Atelier Colibrí Rojo | Arte, Restauración y Academia en Loja, Ecuador",
+  title: "Atelier Colibrí Rojo | Arte Monumental, Restauración y Artes Plásticas en Loja",
   description:
-    "Atelier Colibrí Rojo: 20 años de maestría en arte monumental, restauración de bienes pictóricos, producción audiovisual y academia de artes plásticas en Loja, Ecuador. Formación artística profesional para todas las edades.",
+    "Atelier Colibrí Rojo: Estudio de arte en Loja, Ecuador. Especialistas en murales artísticos, escultura monumental, restauración de obra pictórica, cuadros al óleo y pinturas por encargo. 20 años de trayectoria.",
   keywords: [
+    "restauración de arte sacro",
+    "mantenimiento de obra pictórica",
+    "restauración escultórica",
+    "maquetismo y diseño loja",
     "atelier loja ecuador",
     "restauración de arte loja",
-    "arte monumental ecuador",
-    "academia de arte loja",
-    "muralismo loja",
-    "escultura monumental",
-    "producción audiovisual loja",
+    "murales artísticos loja",
+    "escultura monumental ecuador",
+    "cuadros al óleo loja",
+    "pinturas por encargo loja",
     "colibrí rojo",
-    "restauración pictórica",
-    "cursos de pintura loja",
   ],
   authors: [{ name: "Atelier Colibrí Rojo", url: "https://ateliercolibri.com" }],
   creator: "Atelier Colibrí Rojo",
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
     url: "https://ateliercolibri.com",
     siteName: "Atelier Colibrí Rojo",
     title: "Atelier Colibrí Rojo | Arte y Restauración en Loja, Ecuador",
-    description: "Maestros en arte monumental, restauración, academia de pintura y producción audiovisual en el corazón de Loja, Ecuador.",
+    description: "Maestros en murales artísticos, escultura monumental, restauración y artes plásticas en el corazón de Loja, Ecuador. Cuadros y pinturas por encargo.",
     images: [{
       url: "/Logo.webp",
       width: 800,
@@ -69,6 +70,8 @@ export const metadata: Metadata = {
   },
 };
 
+import WhatsAppFloating from "@/components/WhatsAppFloating";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -80,6 +83,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${cinzel.variable} ${outfit.variable} antialiased font-[family-name:var(--font-outfit)]`}
       >
         {children}
+        <WhatsAppFloating />
       </body>
     </html>
   );

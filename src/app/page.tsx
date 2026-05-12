@@ -22,7 +22,7 @@ import AboutSection from "@/components/AboutSection";
 import VideoShowcase from "@/components/VideoShowcase";
 import ServicesSection from "@/components/ServicesSection";
 import TestimonialsAndFAQ from "@/components/TestimonialsAndFAQ";
-import ContactAndLocation from "@/components/ContactAndLocation";
+import { ArrowUpRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -41,10 +41,10 @@ const COLORS = {
 };
 
 const NAV_LINKS = [
-  { name: "Academia", href: "#academia" },
-  { name: "Aerografía", href: "#aerografia" },
-  { name: "Producción Audiovisual", href: "#audiovisual" },
-  { name: "Galería", href: "#galeria" },
+  { name: "Arte Monumental", href: "/arte-monumental" },
+  { name: "Restauración", href: "/restauracion-de-obra" },
+  { name: "Artes Plásticas", href: "/artes-plasticas" },
+  { name: "Galería", href: "/galeria" },
 ];
 
 // --- Components ---
@@ -89,14 +89,14 @@ const Hero = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:pr-12 lg:border-l lg:border-gray-100 lg:pl-12 h-full lg:h-[60%] flex flex-col justify-center relative z-10 pt-20 lg:pt-0"
+            className="lg:pr-12 lg:border-l lg:border-gray-100 lg:pl-20 h-full lg:h-[60%] flex flex-col justify-center relative z-10 pt-20 lg:pt-0"
           >
             <motion.div variants={itemVariants} className="flex items-center gap-3 lg:gap-4 mb-6 lg:mb-12">
-              <span className="text-[9px] lg:text-[10px] font-bold uppercase tracking-[0.3em] lg:tracking-[0.5em] text-[#EE1D23]">
+              <span className="text-[9px] lg:text-[10px] font-bold uppercase tracking-[0.5em] text-[#EE1D23]">
                 Loja, Ecuador
               </span>
-              <div className="h-[1px] w-8 lg:w-12 bg-gray-300 lg:bg-gray-200" />
-              <span className="text-[9px] lg:text-[10px] font-bold uppercase tracking-[0.3em] lg:tracking-[0.5em] text-gray-600 lg:text-gray-400">
+              <div className="h-[1px] w-8 lg:w-12 bg-gray-200" />
+              <span className="text-[9px] lg:text-[10px] font-bold uppercase tracking-[0.5em] text-gray-400">
                 Studio & Academy
               </span>
             </motion.div>
@@ -104,42 +104,36 @@ const Hero = () => {
             <motion.h1
               id="hero-heading"
               variants={itemVariants}
-              className="text-4xl leading-[1.1] sm:text-5xl lg:text-6xl font-normal lg:leading-[1.1] text-[#0F172A] mb-4 lg:mb-12 tracking-tight font-[family-name:var(--font-cinzel)]"
+              className="text-5xl md:text-7xl lg:text-8xl font-normal leading-[1.0] text-[#0F172A] mb-10 tracking-tight font-[family-name:var(--font-cinzel)]"
             >
-              Atelier Colibrí Rojo: <span className="text-[#EE1D23]">20 años de maestría</span> en arte y restauración en Loja.
+              Atelier Colibrí Rojo: <br />
+              <span className="text-[#EE1D23]">Arte Público</span> y Restauración.
             </motion.h1>
 
-            <motion.div variants={itemVariants} className="max-w-2xl mb-8 lg:mb-16">
-              <h2 className="text-[15px] sm:text-lg lg:text-xl text-gray-700 lg:text-gray-400 leading-relaxed font-light font-[family-name:var(--font-outfit)]">
-                Expertos en arte público monumental, restauración de bienes pictóricos y formación académica profesional.
-                <span className={cn("lg:inline", isExpanded ? "inline" : "hidden")}> Un legado familiar de tres décadas en el corazón de la <span className="text-[#0F172A]/80 lg:text-[#0F172A]/60 font-medium italic">Cuna de los Artistas</span>.</span>
+            <motion.div variants={itemVariants} className="max-w-2xl mb-12">
+              <h2 className="text-base md:text-lg text-gray-500 leading-relaxed font-light font-[family-name:var(--font-outfit)]">
+                <span className="text-[#EE1D23] font-bold">20 años</span> de maestría técnica y legado artístico en el corazón de la cuna de los artistas. 
+                <span className="hidden lg:inline"> Especialistas en creación monumental y conservación de bienes culturales.</span>
               </h2>
-              {!isExpanded && (
-                <button
-                  onClick={() => setIsExpanded(true)}
-                  className="lg:hidden mt-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[#EE1D23] hover:text-[#0F172A] transition-colors flex items-center gap-2"
-                  aria-label="Ver más información"
-                >
-                  Ver más <ArrowRight size={12} strokeWidth={2} />
-                </button>
-              )}
             </motion.div>
 
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 lg:gap-12 w-full">
-              <button
-                className="group relative flex items-center justify-center gap-3 lg:gap-4 text-[10px] font-bold uppercase tracking-[0.2em] lg:tracking-[0.4em] text-white bg-[#EE1D23] px-6 py-4 lg:px-10 lg:py-5 rounded-full hover:bg-[#0F172A] transition-all duration-500 shadow-xl shadow-red-500/10 w-full sm:w-auto"
-                aria-label="Inscribirse a la academia de artes"
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 lg:gap-8 w-full">
+              <a
+                href="/artes-plasticas"
+                className="group relative flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-[0.3em] text-white bg-[#0F172A] px-10 py-5 rounded-2xl hover:bg-[#EE1D23] transition-all duration-500 shadow-xl shadow-[#0F172A]/10 w-full sm:w-auto"
+                aria-label="Ver obras de artes plásticas"
               >
-                Inscribirse a la Academia
+                Obras de Propuesta
                 <ArrowRight size={14} strokeWidth={2} />
-              </button>
+              </a>
 
-              <button
-                className="group flex items-center justify-center gap-3 lg:gap-4 text-[10px] font-bold uppercase tracking-[0.2em] lg:tracking-[0.4em] text-[#0F172A] hover:text-[#EE1D23] transition-colors border-b border-gray-400 lg:border-gray-200 pb-1 w-full sm:w-auto mt-2 sm:mt-0"
-                aria-label="Ver servicios de restauración y arte público"
+              <a
+                href="/arte-monumental"
+                className="group flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-[0.3em] text-[#0F172A] hover:text-[#EE1D23] transition-colors border-b border-gray-200 pb-1 w-full sm:w-auto mt-2 sm:mt-0 font-[family-name:var(--font-outfit)]"
+                aria-label="Ver servicios de arte monumental"
               >
-                Servicios de Restauración y Arte Público
-              </button>
+                Arte Monumental
+              </a>
             </motion.div>
           </motion.div>
 
@@ -148,9 +142,9 @@ const Hero = () => {
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-            className="absolute inset-0 z-0 lg:relative lg:z-auto lg:h-full flex items-center justify-end group focus-within:ring-2 focus-within:ring-[#EE1D23]"
+            className="absolute inset-0 z-0 lg:relative lg:z-auto lg:h-full flex items-center justify-end group"
           >
-            <div className="relative w-full h-full lg:h-[80%] overflow-hidden">
+            <div className="relative w-full h-full lg:h-full overflow-hidden">
               <Image
                 src="/images/home/hero-artista.webp"
                 alt="Artista del Atelier Colibrí Rojo trabajando en una restauración profesional"
@@ -158,7 +152,9 @@ const Hero = () => {
                 className="object-cover transition-transform duration-[3s] group-hover:scale-105"
                 priority
               />
-              <div className="absolute inset-0 bg-[#FDFDFD]/85 lg:bg-[#0F172A]/5" />
+              <div className="absolute inset-0 bg-[#FDFDFD]/90 lg:bg-transparent" />
+              {/* Split overlay for desktop */}
+              <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#FDFDFD] to-transparent hidden lg:block" />
             </div>
 
             {/* Editorial Floating Info */}
@@ -173,13 +169,13 @@ const Hero = () => {
                 <span className="text-[11px] font-bold uppercase tracking-[0.3em] font-[family-name:var(--font-outfit)]">Trayectoria Internacional</span>
               </div>
               <p className="text-xs font-light text-white/60 leading-relaxed mb-6">
-                Cursos con materiales <br />
-                incluidos - Solo $50 USD. <br />
-                Formación en Loja.
+                Consultoría técnica <br />
+                y creación artística <br />
+                personalizada.
               </p>
               <div className="flex items-center gap-2">
                 <div className="h-[1px] w-6 bg-[#EE1D23]" aria-hidden="true" />
-                <span className="text-[9px] font-black uppercase tracking-[0.2em]">Inscripción $50 USD</span>
+                <span className="text-[9px] font-black uppercase tracking-[0.2em]">Estudio Profesional</span>
               </div>
             </motion.div>
           </motion.div>
@@ -200,41 +196,38 @@ const Hero = () => {
 
 // --- Page Layout ---
 
+import TeamSection from "@/components/TeamSection";
+
 export default function LandingPage() {
   return (
     <main className="min-h-screen bg-[#FDFDFD] text-[#0F172A] antialiased selection:bg-[#EE1D23] selection:text-white overflow-x-hidden">
       <Navbar />
       <Hero />
       <AboutSection />
+      <TeamSection />
       <VideoShowcase />
       <ServicesSection />
       <TestimonialsAndFAQ />
-      <ContactAndLocation />
-
-      {/* Academy Excerpt: Minimalist & Clean */}
-      <section id="academia" className="pb-24 lg:pb-32 pt-12 bg-white relative overflow-hidden" aria-labelledby="academia-title">
-        <div className="container mx-auto px-8 flex flex-col items-center text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5, ease: [0.19, 1, 0.22, 1] }}
-          >
-            <div className="flex justify-center mb-10">
-              <Circle size={8} fill="#EE1D23" stroke="none" className="animate-pulse" aria-hidden="true" />
-            </div>
-            <h2
-              id="academia-title"
-              className="text-5xl lg:text-7xl font-normal text-[#0F172A] mb-12 tracking-tight font-[family-name:var(--font-cinzel)] uppercase"
-            >
-              La Cuna de los <span className="text-[#EE1D23]">Artistas</span>
+      
+      {/* Premium Contact CTA */}
+      <section className="py-24 bg-[#0F172A] text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+        </div>
+        <div className="container mx-auto px-8 relative z-10 text-center">
+            <h2 className="text-4xl lg:text-6xl font-normal tracking-tight font-[family-name:var(--font-cinzel)] mb-10">
+                ¿Listo para elevar <br /> <span className="text-[#EE1D23]">su visión artística</span>?
             </h2>
-            <div className="w-16 h-[1px] bg-[#EE1D23] mx-auto mb-16" aria-hidden="true" />
-            <p className="text-lg lg:text-xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed font-[family-name:var(--font-outfit)]">
-              Proporcionamos una formación técnica rigurosa y herramientas de <br className="hidden lg:block" />
-              vanguardia para la nueva generación de creadores visuales expertos en restauración y plástica.
+            <p className="text-lg text-white/60 font-light max-w-2xl mx-auto mb-12 font-[family-name:var(--font-outfit)]">
+                Desde restauraciones de patrimonio hasta monumentos urbanos, nuestro equipo de maestros está listo para asesorarle formalmente.
             </p>
-          </motion.div>
+            <a 
+              href="/contacto" 
+              className="inline-flex items-center gap-4 bg-[#EE1D23] hover:bg-white hover:text-[#0F172A] text-white px-12 py-6 rounded-2xl text-[11px] font-bold uppercase tracking-[0.3em] transition-all duration-500 shadow-xl shadow-red-500/20"
+            >
+              Consultar con el Atelier
+              <ArrowUpRight size={16} />
+            </a>
         </div>
       </section>
 

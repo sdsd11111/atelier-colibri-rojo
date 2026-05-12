@@ -58,7 +58,7 @@ const AboutSection = () => {
                                 className="col-span-2 h-[400px] lg:h-[500px] relative overflow-hidden shadow-2xl"
                             >
                                 <Image
-                                    src="/images/home/about-artista-1.webp"
+                                    src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?q=80&w=1200&auto=format&fit=crop"
                                     alt="Restauración técnica en Atelier"
                                     fill
                                     className="object-cover transition-transform duration-700 hover:scale-105"
@@ -78,7 +78,7 @@ const AboutSection = () => {
                                 className="h-[300px] relative overflow-hidden shadow-xl mt-[-60px] lg:mt-[-100px] z-20"
                             >
                                 <Image
-                                    src="/images/home/about-artista-2.webp"
+                                    src="https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=1200&auto=format&fit=crop"
                                     alt="Arte Monumental"
                                     fill
                                     className="object-cover transition-transform duration-700 hover:scale-110"
@@ -98,7 +98,7 @@ const AboutSection = () => {
                                 className="h-[250px] relative overflow-hidden shadow-lg mt-6 lg:mt-12"
                             >
                                 <Image
-                                    src="/images/home/about-artista-3.webp"
+                                    src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1200&auto=format&fit=crop"
                                     alt="Procesos Creativos"
                                     fill
                                     className="object-cover transition-transform duration-700 hover:scale-110"
@@ -133,16 +133,16 @@ const AboutSection = () => {
                             <div className="flex items-center gap-4 mb-8">
                                 <span className="h-[1px] w-12 bg-[#EE1D23]" />
                                 <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#EE1D23]">
-                                    Quiénes Somos
+                                    Legado & Autoridad
                                 </span>
                             </div>
 
                             <h2 className="text-4xl lg:text-6xl font-normal text-white mb-12 tracking-tight font-[family-name:var(--font-cinzel)] leading-[1.1]">
-                                Un Legado que <br /> <span className="text-[#EE1D23]">Transforma</span> el Arte en Loja.
+                                De la Tradición <br /> a la <span className="text-[#EE1D23]">Vanguardia</span> Artística.
                             </h2>
 
                             <p className="text-lg lg:text-xl font-light text-gray-400 leading-relaxed mb-16 font-[family-name:var(--font-outfit)]">
-                                Desde 2015 como Colibrí Rojo, pero con una raíz que se extiende por décadas. Somos la unión de <strong className="text-white font-medium">tres generaciones de artistas</strong>. Lo que comenzó como un sueño bajo el nombre de <span className="italic">Atlántida</span>, hoy es un centro de referencia técnica con más de <span className="text-white font-bold">20 años de experiencia colectiva</span>.
+                                Lo que nació hace tres décadas bajo el nombre de <span className="italic text-white">Atlántida</span>, ha evolucionado en un **Estudio de Élite** que purifica la técnica artística. Somos un **nodo de soluciones creativas** donde la experiencia de tres generaciones de maestros se une para servir a instituciones, gobiernos y coleccionistas privados. No solo creamos arte; preservamos el patrimonio y esculpimos el futuro urbano de Ecuador.
                             </p>
 
                             {/* The Three Pillars of Mastery */}
@@ -150,13 +150,13 @@ const AboutSection = () => {
                                 <div className="flex gap-8 group">
                                     <div className="flex-shrink-0 w-16 h-16 border border-white/10 bg-white/5 flex items-center justify-center shadow-sm group-hover:border-[#EE1D23] transition-all duration-500">
                                         <span className="text-2xl font-bold text-[#EE1D23]">
-                                            <Counter value={30} />
+                                            <Counter value={20} />
                                         </span>
                                     </div>
                                     <div>
-                                        <h4 className="text-[11px] font-bold uppercase tracking-[0.3em] text-white mb-3">Experiencia Familiar</h4>
+                                        <h4 className="text-[11px] font-bold uppercase tracking-[0.3em] text-white mb-3">Años de Trayectoria</h4>
                                         <p className="text-sm font-light text-gray-500 leading-relaxed max-w-sm">
-                                            30 años de maestría en restauración de bienes pictóricos y escultóricos, preservando el patrimonio artístico.
+                                            Dos décadas de rigor académico y maestría técnica en la restauración de bienes históricos y creación monumental.
                                         </p>
                                     </div>
                                 </div>
@@ -178,13 +178,13 @@ const AboutSection = () => {
                                 <div className="flex gap-8 group">
                                     <div className="flex-shrink-0 w-16 h-16 border border-white/10 bg-white/5 flex items-center justify-center shadow-sm group-hover:border-[#EE1D23] transition-all duration-500">
                                         <span className="text-2xl font-bold text-[#EE1D23]">
-                                            <Counter value={10} />
+                                            <Counter value={20} />
                                         </span>
                                     </div>
                                     <div>
-                                        <h4 className="text-[11px] font-bold uppercase tracking-[0.3em] text-white mb-3">Innovación Digital</h4>
+                                        <h4 className="text-[11px] font-bold uppercase tracking-[0.3em] text-white mb-3">Artes Plásticas</h4>
                                         <p className="text-sm font-light text-gray-500 leading-relaxed max-w-sm">
-                                            10 años liderando la producción audiovisual, animación y diseño con un enfoque artístico único.
+                                            20 años de obras de propuesta original en óleo, acuarela y escultura de autor, con un lenguaje técnico maduro.
                                         </p>
                                     </div>
                                 </div>
