@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Save, Plus, Trash2, Image as ImageIcon, Video, HelpCircle } from "lucide-react";
+import { Save, Plus, Trash2, Image as ImageIcon, Video, HelpCircle, Upload, Link as LinkIcon } from "lucide-react";
 
 interface MediaSlide {
     type: 'image' | 'video';
@@ -21,6 +21,54 @@ export default function BlogEditor({ post }: { post?: any }) {
     const [media, setMedia] = useState<MediaSlide[]>(post?.media || [{ type: 'image', url: '' }]);
     const [isSaving, setIsSaving] = useState(false);
     const [message, setMessage] = useState("");
+    const [errors, setErrors] = useState<{[key: number]: string}>({});
+    const [isDragging, setIsDragging] = useState<{[key: number]: boolean}>({});
+    const [inputModes, setInputModes] = useState<{[key: number]: 'file' | 'url'}>({});
+
+    const handleFileChange = (index: number, file: File | null) => {
+        if (!file) return;
+        
+        const limit = 4 * 1024 * 1024; // 4MB
+        if (file.size > limit) {
+            setErrors(prev => ({ 
+                ...prev, 
+                [index]: `El archivo excede el límite de 4MB (Tamaño: ${(file.size / (1024 * 1024)).toFixed(2)}MB)` 
+            }));
+            return;
+        }
+        
+        setErrors(prev => {
+            const newErrors = { ...prev };
+            delete newErrors[index];
+            return newErrors;
+        });
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            if (e.target?.result) {
+                updateMedia(index, "url", e.target.result as string);
+            }
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const handleDragOver = (e: React.DragEvent, index: number) => {
+        e.preventDefault();
+        setIsDragging(prev => ({ ...prev, [index]: true }));
+    };
+
+    const handleDragLeave = (index: number) => {
+        setIsDragging(prev => ({ ...prev, [index]: false }));
+    };
+
+    const handleDrop = (e: React.DragEvent, index: number) => {
+        e.preventDefault();
+        setIsDragging(prev => ({ ...prev, [index]: false }));
+        const file = e.dataTransfer.files?.[0];
+        if (file) {
+            handleFileChange(index, file);
+        }
+    };
 
     // Efecto para actualizar cuando cambia el post prop (cuando editamos otro desde la tabla)
     useEffect(() => {
@@ -216,36 +264,158 @@ export default function BlogEditor({ post }: { post?: any }) {
                             </button>
                         </div>
 
-                        <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                            {media.map((item, idx) => (
-                                <div key={idx} className="p-4 bg-gray-50 rounded-2xl space-y-3 relative group">
-                                    <div className="flex items-center gap-3">
-                                        <select 
-                                            value={item.type}
-                                            onChange={(e) => updateMedia(idx, "type", e.target.value as any)}
-                                            className="bg-white px-3 py-2 rounded-lg text-[10px] font-bold uppercase border-none focus:ring-0"
-                                        >
-                                            <option value="image">Imagen</option>
-                                            <option value="video">Video</option>
-                                        </select>
-                                        <button 
-                                            type="button" 
-                                            onClick={() => removeMedia(idx)}
-                                            className="ml-auto text-gray-300 hover:text-red-500 transition-colors"
-                                        >
-                                            <Trash2 size={14} />
-                                        </button>
+                        <div className="space-y-6 max-h-[550px] overflow-y-auto pr-2 custom-scrollbar">
+                            {media.map((item, idx) => {
+                                const mode = inputModes[idx] || (item.url && !item.url.startsWith("data:") ? 'url' : 'file');
+                                
+                                return (
+                                    <div key={idx} className="p-5 bg-gray-50 rounded-3xl space-y-4 relative group border border-gray-100/50 shadow-sm transition-all duration-300 hover:shadow-md">
+                                        <div className="flex items-center justify-between gap-3">
+                                            <div className="flex items-center gap-2">
+                                                <select 
+                                                    value={item.type}
+                                                    onChange={(e) => {
+                                                        updateMedia(idx, "type", e.target.value as any);
+                                                        updateMedia(idx, "url", "");
+                                                    }}
+                                                    className="bg-white px-3 py-2 rounded-xl text-[10px] font-bold uppercase border-none focus:ring-1 focus:ring-[#EE1D23]/20 shadow-sm"
+                                                >
+                                                    <option value="image">Imagen</option>
+                                                    <option value="video">Video</option>
+                                                </select>
+                                                
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setInputModes(prev => ({ ...prev, [idx]: mode === 'file' ? 'url' : 'file' }))}
+                                                    className="text-[9px] font-bold uppercase tracking-widest text-[#EE1D23] hover:underline flex items-center gap-1 px-2 py-1 bg-red-50/50 rounded-lg font-[family-name:var(--font-outfit)]"
+                                                >
+                                                    {mode === 'file' ? <LinkIcon size={10} /> : <Upload size={10} />}
+                                                    {mode === 'file' ? "Usar URL" : "Subir Archivo"}
+                                                </button>
+                                            </div>
+                                            <button 
+                                                type="button" 
+                                                onClick={() => {
+                                                    removeMedia(idx);
+                                                    setErrors(prev => {
+                                                        const n = { ...prev };
+                                                        delete n[idx];
+                                                        return n;
+                                                    });
+                                                }}
+                                                className="text-gray-300 hover:text-red-500 transition-colors p-1"
+                                                title="Eliminar Slot"
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </div>
+
+                                        {/* Drop zone / selector or manual input */}
+                                        {mode === 'file' ? (
+                                            <div className="space-y-2">
+                                                {item.url ? (
+                                                    <div className="relative rounded-2xl overflow-hidden bg-black/5 aspect-video border border-gray-100 flex flex-col items-center justify-center group/preview">
+                                                        {item.type === 'image' ? (
+                                                            <img 
+                                                                src={item.url} 
+                                                                alt="Vista previa" 
+                                                                className="w-full h-full object-cover animate-fade-in"
+                                                            />
+                                                        ) : (
+                                                            <video 
+                                                                src={item.url} 
+                                                                controls 
+                                                                className="w-full h-full object-cover"
+                                                            />
+                                                        )}
+                                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-center justify-center">
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => updateMedia(idx, "url", "")}
+                                                                className="px-4 py-2 bg-white text-[#EE1D23] rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-[#EE1D23] hover:text-white transition-all shadow-lg"
+                                                            >
+                                                                Cambiar Archivo
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <div
+                                                        onDragOver={(e) => handleDragOver(e, idx)}
+                                                        onDragLeave={() => handleDragLeave(idx)}
+                                                        onDrop={(e) => handleDrop(e, idx)}
+                                                        onClick={() => {
+                                                            const fileInput = document.getElementById(`file-input-${idx}`);
+                                                            if (fileInput) fileInput.click();
+                                                        }}
+                                                        className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-3 ${
+                                                            isDragging[idx] 
+                                                                ? "border-[#EE1D23] bg-red-50/30 scale-[0.98]" 
+                                                                : "border-gray-200 hover:border-[#EE1D23]/30 hover:bg-gray-50"
+                                                        }`}
+                                                    >
+                                                        <input 
+                                                            type="file" 
+                                                            id={`file-input-${idx}`}
+                                                            className="hidden" 
+                                                            accept={item.type === 'image' ? "image/*" : "video/*"}
+                                                            onChange={(e) => {
+                                                                const file = e.target.files?.[0] || null;
+                                                                handleFileChange(idx, file);
+                                                            }}
+                                                        />
+                                                        <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-[#EE1D23]">
+                                                            {item.type === 'image' ? <ImageIcon size={20} /> : <Video size={20} />}
+                                                        </div>
+                                                        <div>
+                                                            <p className="text-[10px] font-bold uppercase tracking-wider text-[#0F172A] font-[family-name:var(--font-outfit)]">
+                                                                Arrastra aquí tu {item.type === 'image' ? 'imagen' : 'video'}
+                                                            </p>
+                                                            <p className="text-[9px] text-[#64748B] mt-1 font-[family-name:var(--font-outfit)]">
+                                                                o haz clic para explorar. Límite máximo: <span className="font-bold text-[#EE1D23]">4 MB</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ) : (
+                                            <div className="space-y-2">
+                                                <input 
+                                                    type="text" 
+                                                    value={item.url}
+                                                    onChange={(e) => updateMedia(idx, "url", e.target.value)}
+                                                    className="w-full px-4 py-3 bg-white rounded-xl text-[10px] border border-gray-100 focus:outline-none focus:ring-1 focus:ring-[#EE1D23]/20 focus:border-[#EE1D23]/20"
+                                                    placeholder={item.type === 'image' ? "URL de la imagen (ej: https://...)" : "Link de YouTube/Vimeo o archivo remoto..."}
+                                                />
+                                                {item.url && (
+                                                    <div className="relative rounded-xl overflow-hidden bg-black/5 aspect-video border border-gray-100 flex flex-col items-center justify-center">
+                                                        {item.type === 'image' ? (
+                                                            <img 
+                                                                src={item.url} 
+                                                                alt="Vista previa" 
+                                                                className="w-full h-full object-cover"
+                                                                onError={(e) => {
+                                                                    (e.target as HTMLElement).style.display = 'none';
+                                                                }}
+                                                            />
+                                                        ) : (
+                                                            <div className="text-[9px] text-gray-400 font-bold uppercase p-4 text-center">
+                                                                Vista previa no disponible para URLs de video externas
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+
+                                        {errors[idx] && (
+                                            <p className="text-[#EE1D23] text-[9px] font-bold uppercase tracking-wider bg-red-50 px-3 py-2 rounded-lg">
+                                                {errors[idx]}
+                                            </p>
+                                        )}
+                                        <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-8 bg-gray-200 rounded-full group-hover:bg-[#EE1D23] transition-colors" />
                                     </div>
-                                    <input 
-                                        type="text" 
-                                        value={item.url}
-                                        onChange={(e) => updateMedia(idx, "url", e.target.value)}
-                                        className="w-full px-4 py-3 bg-white rounded-xl text-[10px] border-none focus:ring-1 focus:ring-[#EE1D23]/20"
-                                        placeholder={item.type === 'image' ? "URL de la imagen..." : "Link de YouTube/Vimeo..."}
-                                    />
-                                    <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-8 bg-gray-200 rounded-full group-hover:bg-[#EE1D23] transition-colors" />
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
 
